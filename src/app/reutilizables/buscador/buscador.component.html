@@ -1,0 +1,33 @@
+<div id="content-buscador" [style.background-color]="colorFondos" #backgroundDiv>
+  <div class="cont-buscador">
+    <div class="c-buscador-m">
+      <svg class="tamanio-icon" style="position: relative; left: 22px; color: #8d8c8c;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path fill="#ffffff" d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/>
+      </svg>
+      <input type="text" name="" id="input-buscador" placeholder="Buscar en la tienda">
+      <a href="" class="link-blanco">Descubrir</a>
+      <a href="explorar" class="link-blanco">Explorar</a>
+      <a href="" class="link-blanco">Noticias</a>      
+      <div id="cesta-div">
+        <!-- <button id="btn-icon" class="link-blanco" (click)="showModal()"><i class="fi fi-sr-shopping-cart cesta-icono" ></i></button>
+        <p class="link-blanco">Productos en la Cesta: </p>
+        <ul>
+          <li class="link-blanco" *ngFor="let itemProducto of dataCesta">
+            ID Juego: {{itemProducto.idJuego}}
+            Juego: {{itemProducto.juego}}
+            Descuento: {{itemProducto.loMenos}} %
+            Costo: {{itemProducto.costo}}
+          </li>
+        </ul>
+        <p class="link-blanco">Costo total es: {{dataTotalCesta}}</p> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-cesta-modal [isVisible]="isVIsible" (onClose)="handleClose()">
+  <h2>{{ modalTitle }}</h2>
+  <p>{{ modalContent }}</p>
+  <button (click)="onConfirm()">Confirmar</button>
+  <button (click)="onCancel()">Cancelar</button>
+</app-cesta-modal> -->

@@ -1,0 +1,488 @@
+* {
+  font-family: sans-serif;
+
+  /* background-color: #082d31; */
+}
+
+/* .c-full {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+} */
+
+/* .c-medium {
+  width: 77%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+} */
+
+.detalles-container{
+  /* background-color: #007006; */
+}
+
+.detalles-content{
+  width: 77%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.tituloProducto{
+  color: #ffff;
+  margin-top: 30px;
+}
+
+.c-categoria{
+  /* background-color: orange; */
+  color: #ffff;
+  display: flex;
+  width: 100%;
+
+}
+
+#estrellas-movil{
+  display: none;
+
+}
+
+.c-categoria p {
+  margin-right: 50px;
+  padding: 20px 0;
+}
+
+.c-juego{
+  display: flex;
+  width: 100%;
+  height: auto;
+  /* background-color: yellowgreen; */
+  flex-wrap: wrap;
+}
+
+.c-imgDescripcion{
+  /* background-color: red; */
+  display: flex;
+  width: 62%;
+  width: 100%;
+  height: auto;
+  /* margin-right: 6%; */
+
+}
+
+.c-imagenes{
+  width: 62%;
+}
+
+.c-imagenes img{
+  /* width: 475px; */
+  width: 100%;
+  height: auto;
+}
+
+.c-info{
+  /* background-color: chocolate; */
+  width: 32%;
+  height: auto;
+  margin-left: 10%;
+  padding-top: 62px;
+}
+
+.logoJuego{
+  display: flex;
+  justify-content: center;
+  /* background-color: chocolate; */
+  width: 100%;
+  height: 180px;
+  max-height: 180px;
+}
+
+.logoJuego img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Ajusta la imagen sin distorsionarla */
+  /* width: auto;
+  height: auto; */
+  display: block;
+  margin: 0 auto; /* Centra la imagen */
+}
+
+
+.c-descripcion{
+  padding: 60px 0;
+  color: #ffff;
+  font-size: 16px;
+  width: 60%;
+}
+
+.c-descripcion p{
+  font-family: 'inherit', sans-serif;
+  font-size: 16px;
+  font-weight: 400px;
+  /* letter-spacing: 2px; */
+  line-height: 1.5;
+}
+
+.precioJuego p{
+  padding-top: 5px;
+  margin-top: 10px;
+  margin-right: 15px;
+  color: #ffff;
+}
+
+.etiquetaBase{
+  padding: 4px;
+  background-color: #ffffff3a;
+
+  color: #ffff;
+  font-size: 10px;
+  width: 75px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+
+.c-descuento{
+  /* background-color: blue; */
+  background-color: #39a0a2;
+  color: #ffff;
+  font-size: 12px;
+  width: 55px;
+  border-radius: 5px;
+ text-align: center;
+}
+
+.btn-compras{
+  margin-top:10px;
+  width: 100%;
+  /* height: 30px; */
+
+  border-width: 0px;
+
+  color: #ffff;
+}
+
+.btn-comprar{
+  height: 50px;
+  border-radius: 5px;
+  background-color: #c74127;
+  background-color: blueviolet;
+}
+
+
+.btn-addCarrito{
+  height: 40px;
+  border-radius: 5px;
+  border-width: 1px #ffff;
+
+  background-color: #ffffff49;
+
+  backdrop-filter: (5px);
+}
+
+
+.btn-addDeseos{
+  height: 35px;
+  border-radius: 5px;
+  font-size: 12px;
+
+  text-align: center;
+
+  background-color: #ffffff00;
+
+  border: 1px solid #ffff;
+
+  padding: 5px 0;
+}
+
+
+/* Apartado de comentarios */
+
+  /* Encabezado */
+  header {
+    display: flex;
+    background-color: #ffffff;
+    padding: 20px;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.product-details {
+    padding-top: 70px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #121212;
+    color: #ffff;
+}
+
+.cont-hijo {
+    width: 90%;
+    display: flex;
+    justify-content: center;
+}
+
+
+.product-images img {
+    max-width: 500px;
+    margin-bottom: 10px;
+}
+
+.product-info {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.product-title {
+    font-size: 30px;
+    margin-top: 0;
+}
+
+.product-description {
+    margin: 10px 20px;
+    text-align: justify;
+}
+
+.product-price {
+    font-size: 40px;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 0 20%;
+}
+
+.tituloResponsivo {
+    display: flex;
+    justify-content: center;
+    padding-top: 6%;
+    visibility: hidden;
+}
+.tituloCaracteristicas {
+    display: flex;
+    justify-content: center;
+    padding-top: 6%;
+}
+
+/* COMENTARIOS */
+.cont-padre {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    background-color: #121212;
+    color: #ffff;
+}
+
+.contenedor {
+    width: 60%;
+    margin: 30px 0px;
+}
+
+.product-features ul {
+    margin-top: 20px;
+}
+
+.product-reviews {
+    /* margin-top: 20px; */
+    margin-top: 60px;
+}
+
+.review {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.review-user {
+    font-weight: bold;
+}
+
+.review-rating {
+    font-size: 18px;
+}
+
+.review-text {
+    margin-top: 0;
+}
+
+/* COMENTARIOS */
+.titulo {
+    display: flex;
+    justify-content: center;
+    padding-top: 6%;
+}
+
+#btn {
+    display: flex;
+    padding: 0 25px;
+    justify-content: space-between;
+}
+
+.btnResponsivo{
+    display: flex;
+    padding: 0 25px;
+    justify-content: space-between;
+    /* visibility: hidden; */
+}
+
+#btn-verde {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btn-azul {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #3983f1;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btn-rojo {
+    text-align: center;
+    padding: 10px 20px;
+    background-color: #f13f39;
+    color: white;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0px 0px 0px 10px;
+}
+
+.calificacion {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 4%;
+}
+
+.tamanio {
+    font-size: 20px;
+}
+
+
+
+@media (max-width: 600px){
+
+    .c-full{
+
+    }
+
+    .c-medium{
+      width: 10%;
+    }
+
+  .detalles-content{
+    width: 95%;
+  }
+
+    .tituloProducto{
+      font-size: 15px;
+    }
+
+    .c-categoria{
+      margin: 30px 0 0 0;
+    }
+
+
+    .c-categoria p {
+      margin-right: 0;
+      padding: 20px 0;
+    }
+
+
+    #estrellas-pc{
+      display: none;
+    }
+
+    #estrellas-movil{
+      display: block;
+      width: 20%;
+      /* background-color: blueviolet; */
+      text-align: center;
+    }
+    
+    #experiencia-juego{
+      width: 40%;
+      /* background-color: blue; */
+      text-align: center;
+    }
+    
+    #nivel-juego{
+      /* background-color: red; */
+      width: 40%;
+      text-align: center;
+    }
+
+    .c-juego{
+      width: 100%;
+    }
+
+    
+    .c-imgDescripcion{
+      width: 100%;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-right: 0;
+
+    }
+
+    .c-imagenes{
+      width: 100%;
+    }
+
+    .c-info{
+      width: 100%;
+      margin: 0;
+    }
+
+    
+
+    .logoJuego img{
+      width: 80%;
+      /* height: auto; */
+      /* object-fit: cover; */
+      object-position: center;
+    }
+    
+
+    .btnResponsivo{
+        display: block;
+        visibility: visible;
+    }
+    #btn-verde{
+        width: 40%;
+        font-size: 15px;
+    }
+    #btn-azul{
+        width: 40%;
+        font-size: 15px;
+    }
+
+    #btn-rojo {
+        width: 40%;
+        font-size: 15px;
+    }
+
+
+    .c-descripcion{
+      width: 95%;
+    }
+
+
+}

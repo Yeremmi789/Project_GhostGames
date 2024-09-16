@@ -1,0 +1,957 @@
+
+*{
+  font-family: sans-serif;
+}
+
+/* COMANDOS NUEVOS
+  background-repeat: no-repeat; Para que no se repita la imagen
+  background-attachment: fixed;  Para que la imagen se quede fija y siga la pantalla
+  filter: grayscale(100%); Para hacer que se vuelva en blanco y negro 
+
+  aplicar una transicion y hover para entender mejor
+  transform: translate3d(200px, 10%, 3em); 1.- mover verticalmente, 2.- mover horizontalmente, 3.- la profundidad que tomará (z-index)
+  transform: skewY(0.07rad); para inclinar los objetos verticalmente :0
+  transform: skewX(10deg); para que se incline horizontalmente
+  transform: rotate(0.5turn); rotar elementos :D
+  
+
+Recortes
+   clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%); 
+   1.-quitar pedazo inclinacion  izquierda - derecha
+   2.- inclinacion arriba - izquierda
+   3.-quitar pedazo inclinacion  derecha - izquierda
+   4.- Altura 
+   5.-quitar pedazo inclinacion  abajo (derecha - izquierda)
+   6 NOSE 
+   7 NOSE 
+   8 NOSE 
+
+  clip-path: polygon(0% 0%, 100% 0%, 50% 50%);  ESTO ES UN TRIANGULO INVERTIDO
+
+
+*/
+
+.banner-container {
+  width: 100%;
+  height: 800px;
+  max-height: 800px;
+  background-image: url('/assets/Inicio/lol.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  color: #fff;
+  box-shadow: 20px 40px 60px rgba(255, 255, 255, 0.8); 
+  z-index: 20px;
+}
+
+.banner-content{
+  width: 100%;
+  /* height: auto; */
+  height: 100%;
+  display: flex;
+  /* justify-content: center; */
+  justify-content: start;
+  /* background-color: rgba(0, 0, 0, 0.56); */
+  background-color: rgba(0, 0, 0, 0.7);
+  align-items: center;
+}
+
+.banner-text {
+  width: 30%;
+  height: 500px;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  /* background-color: blue; */
+  display: flex;
+  /* justify-content: center; */
+  flex-wrap: wrap;
+
+  margin-left: 50px;
+}
+
+.banner-title{
+  width: 100%;
+  height: auto;
+  display: flex;
+  /* justify-content: center; */
+}
+
+#banner-ghostgames{
+  font-size: 100px;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 200;
+}
+
+.banner-description {
+  display: flex;
+  width: 100%;
+  height: auto;
+
+  
+}
+
+.banner-description p {
+  line-height: 1.5;
+}
+
+/* .banner-description p:hover {
+  transform: skewX(10deg);
+  transition: all 300ms;
+} */
+
+
+#banner-boton{
+  width: 300px;
+  height: auto;
+  padding: 10px 20px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 25px;
+  background-color: blueviolet;
+  border: 1px solid #fff;
+  /* background-color: transparent; */
+  color: #ffff;
+}
+
+
+#banner-boton:hover{
+  cursor: pointer;
+  border: 3px solid #fff;
+  /* transform: translate3d(10px, 50%, 0em); */
+  transition: all 300ms;
+  /* border-color: blue; */
+  /* transform: skewY(0.07rad); */
+  transform: skewX(10deg);
+  /* background-color: blueviolet; */
+  /* background-color: #10E3E5; */
+
+}
+
+.rotar-item:hover{
+  transform: rotate(0.5turn);
+  transition: all 300ms;
+}
+
+/* url('assets/imagenes/terror.jpg') */
+
+
+.titles-container {
+  background-color: #e1bcd2;
+  width: 100%;
+  display: flex;
+  height: auto;
+  /* background-color: #10E3E5; */
+  /* background-color: #321053; */
+  background-color: #191919;
+  justify-content: center;
+
+  z-index: 19px;
+
+}
+
+.cards-container{
+  display: flex;
+  width: 80%;
+  height: auto;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 6%;
+}
+ 
+.cards-content{
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+
+
+.cards-h1{
+  color: #ffff;
+  font-size: 40px;
+  font-family: 'Oswald', sans-serif;
+}
+
+
+/* REVISAR Y ANALIZAR COMO SE HIZO ESTA ANIMACIÓN */
+.tarjeta{
+  display: flex;
+  width: 20%;
+  height: auto;
+  /* background-color: violet; */
+  flex-wrap: wrap;
+  /* border: 1px solid #ffff; */
+  /* box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2); */
+  border: 1px solid #343434;
+  box-shadow: 5px 15px 10px rgba(0, 0, 0, 0.9);
+
+margin: 30px 20px;
+
+}
+
+.tarjeta:hover{
+  /* transform: translate3d(0px, -3%, 0em); */
+  /* transition: all 300ms; */
+  transition: all 1000ms;
+  cursor: pointer;
+  /* transform: translateY(-4px); */
+
+  transform: translateY(-5px) scale(1.05);
+  /* animation: rebotarxd 0.5s ease-in-out infinite; */
+  animation: rebotarxd 1s ease-in-out infinite;
+  box-shadow: 5px 5px 10px rgba(255, 255, 255, 0.5);
+  border: 1px solid #ffff;
+}
+
+.tarjeta:active {
+  transform: translateY(0px) scale(1);
+}
+
+@keyframes rebotarxd {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.tarjeta div{
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+
+.tarjeta-h1{
+  width: 100%;
+  font-size: 20px;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+  color: #fff;
+  /* color: #10E3E5; */
+  color: #8A2BE2;
+  font-weight: 500;
+
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); */
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.4);
+}
+
+.tarjeta-imagen {
+  width: 150px; /* Ajusta este valor según el tamaño que desees */
+  height: 150px; /* Debe ser igual al ancho para mantener la forma circular */
+  object-fit: cover; /* Para asegurar que la imagen cubra todo el círculo sin distorsionarse */
+  border-radius: 50%; /* Hace que la imagen sea un círculo */
+  display: block; /* Asegura que la imagen se muestre como bloque y no tenga espacio extra debajo */
+  margin: 0 auto; /* Centra la imagen dentro del contenedor */
+}
+
+
+.tarjeta-p{
+  color: #fff;
+  margin-top: 20px;
+  padding: 15px;
+}
+
+
+.header-container img {
+  /* clip-path: polygon(30% 0%, 100% 0%, 100% 100%, 0% 100%); */
+  /* clip-path: polygon(0% 0%, 100% 0%, 50% 50%);  */
+
+}
+
+
+.coleccion-m-container{
+  width: 100%;
+  background-color: #141414;
+  display: flex;
+  justify-content: center;
+}
+
+.coleccion-content{
+  width: 90%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  /* margin: 50px 0; */
+  /* margin: 14% 0; */
+  margin: 10% 0;
+
+}
+
+.coleccion-info{
+  width: 30%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+#coleccion-h3{
+  width: 100%;
+  height: auto;
+  font-family: 'Oswald';
+  font-size: 20px;
+  /* color: rgb(168, 1, 1); */
+  color: #8A2BE2;
+  /* background-color: blue; */
+  display: flex;
+  align-items: end;
+  font-weight: 400;
+}
+#coleccion-h1{
+  width: 100%;
+  font-family: 'Oswald';
+  font-size: 42px;
+  /* font-weight: 400; */
+  color: #ffff;
+  /* line-height: 1.2em; */
+  max-height: 20px;
+}
+#coleccion-p{
+  /* width: 100%; */
+  color: #fff;
+  height: 20px;
+  /* font-family: 'Oswald'; */
+  font-weight: 200;
+}
+#coleccion-button{
+  width: 140px;
+  min-height: 50px;
+  max-height: 60px;
+  background-color: #8A2BE2;
+  border: 0 solid #0000;
+  color: #ffff;
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  /* border-radius: 30px; */
+  font-weight: bold;
+  border: 1px solid #fff;
+}
+
+#coleccion-button:hover{
+  cursor: pointer;
+  border: 3px solid #fff;
+  /* transform: translate3d(10px, 50%, 0em); */
+  transition: all 300ms;
+  /* transform: skewY(0.07rad); */
+  /* background-color: transparent; */
+  transform: skewX(10deg);
+}
+
+
+
+
+/* Pruebas carousel items PRUEBA*/
+
+.carrousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+  /* overflow: hidden; */
+}
+
+.carousel-item {
+  min-width: calc(100% / 3);
+  box-sizing: border-box;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+/* Pruebas carousel items PRUEBA*/
+.carrusel-content{
+  position: relative;
+  /* width: 50%; */
+  width: 60%;
+  overflow: hidden;
+  margin: auto;
+  /* width: 100%; */
+}
+
+.carrusel-pagina{
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  /* background-color: #8A2BE2; */
+}
+
+.carrusel-juego {
+  display: flex;
+  flex-direction: column; /* Coloca la imagen y la info en columna */
+  align-items: center; /* Centra los elementos horizontalmente */
+  margin: 0 20px; /* Margen entre elementos */
+  min-width: calc(100% / 3 - 40px); /* Ajuste del ancho */
+}
+
+
+.imagen-juego{
+  width: 100%;
+  display: flex;
+  height: auto;
+}
+
+.img-juego{
+  width: 100%;
+  object-fit: cover;
+}
+
+
+
+.carrusel-flechas{
+  margin: 10px 0;
+}
+
+.icon-flecha-producto{
+  /* background-color: rgb(143, 143, 143); */
+  border-radius: 40px;
+  font-size: 20px;
+  color: #ffff;
+  height: 20px;
+}
+
+.btn-flechas{
+  background: #202121; /* Fondo transparente */
+  backdrop-filter: blur(5px); /* Desenfoque */
+  -webkit-backdrop-filter: blur(10px); /* Desenfoque para Safari */
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  border: 1px solid #202121;
+  margin: 5px 0px;
+  margin-right: 10px;
+
+}
+
+.btn-flechas:hover{
+  background: rgba(249, 249, 249, 0.794); /* Fondo transparente */
+  cursor: pointer;
+  border: 1px solid #ffff;
+}
+
+
+.categoria-juego{
+  color: #777677; 
+  font-size: 9px;
+  line-height: 15px;
+  font-weight: 800;
+}
+
+.info-juego {
+  background-color: #131312;
+  color: #ffff;
+}
+
+.info-juego p {
+  padding-top: 10px;
+  font-family: sans-serif;
+  line-height: 20px;
+}
+
+.full{
+  width: 100%;
+}
+
+
+
+
+.experiencia-container{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  /* padding: 200px 0; */
+  background-color: #191919;
+}
+
+.experiencia-content{
+  width: 80%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 14% 0;
+  /* background-color: red; */
+}
+
+.experiencia-item{
+  width: 30%;
+  height: auto;
+  margin: 30px auto 50px auto;
+  /* background-color: red; */
+  /* background-color: violet; */
+  width: 20%;
+  margin: 30px 1% 50px 1%;
+  background-color: #212121;
+  padding: 30px 50px;
+  border-radius: 5px;
+}
+
+.exp-item{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.exp-titulo{
+  font-size: 22px;
+  margin: 35px 0;
+
+  font-family: 'Oswald', sans-serif;
+  color: #ffff;
+}
+
+.exp-icono{
+  width: 60px;
+}
+
+.exp-descripcion{
+  line-height: 1.5em;
+  text-align: center;
+  color: #ffff;
+}
+
+
+
+.iconos_ghost{
+  width: 90px;
+  height: 90px;
+  fill: #15F7FC;
+}
+
+.tarjetaJuego-cont{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;  
+  background-color: #191919;
+
+  padding: 100px 0;
+}
+.tarjuego-cont{
+  width: 80%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  /* background-color: blueviolet; */
+  flex-wrap: wrap;
+}
+.tarj-item{
+  width: 31%;
+  /* height: auto; */
+  display: flex;
+  flex-wrap: wrap;
+
+  height: 400px;
+  overflow: hidden;
+
+  margin: 30px 0;
+}
+.tarj-imagen {
+  position: relative;
+  width: 100%;
+  height: 300px; /* Ajusta según sea necesario */
+  overflow: hidden;
+  z-index: 5;
+}
+
+.tarj-imagen img{
+  transition: transform 0.3s ease; /* Suaviza la transformación */
+}
+/* .tarj-imagen label{
+  transition: transform 0.3s ease; 
+} */
+
+.tarj-imagen:hover img{
+  transform: scale(1.2); /* Aumenta el tamaño en un 20% */
+  cursor: pointer;
+  overflow: hidden;
+}
+
+
+
+.tarj-label {
+  position: absolute;
+  bottom: 0; /* Coloca el label en la parte inferior */
+  left: 0;
+  right: 0;
+  /* background-color: rgba(255, 165, 0, 0.8); */
+  background-color: #892be2fd; /* Fondo semitransparente */
+  color: #fff;
+  font-size: 25px;
+  padding: 10px 15px;
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
+  /* width: 130px; */
+  width: 80px;
+  /* border: 1px solid #ffff; */
+  z-index: 10;
+}
+
+
+.tarj-img {
+  /* width: 100%;
+  height: 100%; */
+  width: 100%;
+  /* width: 600px; */
+  height: 300px;
+  
+  object-fit: cover;
+  object-position: center;
+}
+
+.tarj-info{
+  width: 100%;
+  display: flex;
+  height: 100px;
+  background-color: black;
+  flex-wrap: wrap;
+}
+
+#tarj-titulo{
+  color: #ffff;
+  width: 100%;
+  font-size: 18px;
+  height: 50%;
+  /* background-color: blue; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  padding-left: 30px;
+}
+
+#tarj-descripcion{
+  color: #ffff;
+  width: 100%;
+  font-size: 14px;
+  height: 50%;
+  /* background-color: green; */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  padding-left: 30px;
+
+}
+
+/* Pruebas - Carrusel */
+
+
+/* Cuerpo de la sección de productos */
+.c-titulo-productos{
+  display: inline-block;
+  width: 100%;
+  background-color: chocolate;
+  margin: 0 10px;
+
+  color: rgb(245, 245, 245);
+  font-size: 18px;
+  font-weight: 400px;
+  line-height: 25.2px;
+}
+
+.c-product{
+  width: 20%;
+  height: auto;
+  margin: 0 10px;
+}
+
+.c-product img {
+  width: 100%;
+  height: auto;
+}
+
+/* Contenedor de cada Producto */
+.info{
+  background-color: #131312;
+  color: #ffff;
+}
+
+.info p{
+  padding-top: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: sans-serif;
+}
+
+.precios{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* background-color: chartreuse; */
+}
+
+.c-descuento{
+  /* background-color: blue; */
+  width: 50%;
+  display: flex;
+  align-items: center;
+  }
+
+.c-cantidad{
+    /* background-color: yellow; */
+    width: 50%;
+}
+
+.c-cantidad p{
+  font-size: 15px;
+  font-weight: 550;
+  display: flex;
+  justify-content: end;
+}
+
+
+
+/* Animación Linea izquierda a derecha  */
+
+
+.hover-line {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-line::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background-color: #ffff; /* Color de la línea */
+  transition: width 0.3s ease-in-out;
+}
+
+.hover-line:hover::after {
+  width: 100%; /* Expande la línea a lo largo del elemento */
+}
+
+
+
+@media screen and (max-width: 768px) {
+  .banner-container {
+    height: 600px; /* Reduce la altura en pantallas medianas */
+    width: 100%;
+    background-position: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .banner-container {
+    height: 400px; /* Reduce la altura en pantallas pequeñas */
+    height: 100vh; /* Altura de la ventana visible */
+    height: 120vh;
+    height: 1440px;
+  background-attachment: unset; 
+
+  }
+
+  .banner-content{
+
+  }
+
+  .banner-text{
+    width: 100%;
+    font-size: 20px;
+    height: auto;
+    margin: 0;
+    padding: 0 20px;
+    justify-content: center;
+  }
+
+  .banner-title{
+    margin: 30px 0;
+    justify-content: center;
+  }
+  .banner-description{
+    margin: 0 0 20px 0;
+    text-align: center;
+  }
+
+  #banner-ghostgames{
+    font-size: 70px;
+    text-align: center;
+  }
+
+  .tarjetaJuego-cont{
+    padding: 100px 0;
+
+  }
+
+  .tarjuego-cont{
+    width: 85%;
+    height: auto;
+    display: flex;
+    justify-content: space-between;
+    /* background-color: blueviolet; */
+    flex-wrap: wrap;
+  }
+
+  .tarj-item{
+    width: 100%;
+    width: 50%;
+    height: 400px;
+    height: 200px;
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px 0;
+  }
+
+  .tarj-imagen {
+    position: relative;
+    width: 100%;
+    height: 150px;
+  }
+
+  .tarj-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para cubrir todo el contenedor */
+    object-position: center; /* Centra la imagen dentro del contenedor */
+    transition: all 900ms ease;
+  }
+
+  .tarj-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #892be2fd;
+    color: #fff;
+    font-size: 15px;
+    padding: 5px 7.5px;
+    min-width: 21%;
+  }
+
+  .tarj-info{
+    width: 100%;
+    display: flex;
+    height: 50px;
+    background-color: black;
+  }
+
+  #tarj-titulo{
+    color: #ffff;
+    font-size: 12px;
+    display: flex;
+    padding-top: 5px;
+    padding-left: 5px;
+    padding-bottom: 0px;
+    margin: 0;
+    /* background-color: red; */
+    height: 15px;
+
+  }
+  
+  #tarj-descripcion{
+    font-size: 12px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+  }
+
+
+  /* Sección Colección de juegos */
+
+
+  .coleccion-content{
+    flex-wrap: wrap;
+
+}
+
+  .coleccion-info{
+    width: 100%;
+    /* background-color: red; */
+    height: 300px;
+    
+  }
+
+  #coleccion-h3{
+    width: 100%;
+    /* background-color: green; */
+  }
+    
+  #coleccion-h1{
+    width: 100%;
+    /* background-color: blue; */
+    font-size: 35px;
+    /* text-align: center; */
+  max-height: 20px;
+  }
+
+#coleccion-p{
+  /* background-color: orange; */
+  margin: 10px 0 30px 0;
+
+}
+
+  .carrusel-content{
+    width: 100%;
+
+  }
+
+  #coleccion-button{
+    /* width: 100%;
+    height: auto; */
+    margin: 10px 0;
+  }
+
+  .carrusel-juego {
+    margin: 0 5px;    
+    min-width: calc(100% / 3 - 10px); /* Ajuste del ancho */
+  }
+
+  .carrusel-flechas{
+    display: flex;
+    justify-content: end;
+  }
+
+  
+/* Experiencias del sitio para el usuario */
+
+.experiencia-content{
+  width: 100%;
+}
+
+.experiencia-item{
+  margin: 0;
+}
+
+.experiencia-item{
+  width: 48%;
+  margin: 50px 1% 0 1%;
+}
+
+.exp-item{
+  width: 100%;
+
+}
+
+.exp-titulo{
+  font-size: 18px;
+  text-align: center;
+  margin: 20px 0;
+
+}
+
+.exp-descripcion{
+  font-size: 13px;
+}
+
+
+.iconos_ghost{
+  width: 50px;
+  height: 50px;
+  fill: #15F7FC;
+}
+
+
+}

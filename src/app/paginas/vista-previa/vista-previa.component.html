@@ -1,0 +1,179 @@
+<!-- <div class="c-full" [style.background-color]="colorFondos">
+  <div class="c-medium">
+    <div class="tituloProducto">
+      <h1>{{productoSeleccionado.name}}</h1>
+    </div>
+    <div class="c-categoria">
+      <p id="estrellas-movil">⭐x5</p>
+      <p id="estrellas-pc">⭐⭐⭐⭐⭐</p>
+      <p id="experiencia-juego">Buenas batallas contra jefes</p>
+      <p id="nivel-juego">Ideal para principiantes</p>
+    </div>
+    <div class="c-juego">
+      <div class="c-imgDescripcion">
+        <div class="c-imagenes">
+           <app-juego-carousel></app-juego-carousel>
+        </div>
+        <div class="c-descripcion">
+
+          <p>En Shadow of the Tomb Raider: Definitive Edition, vive el capítulo final de la historia sobre el origen de Lara, en el que se convierte en la saqueadora de tumbas que está destinada a ser.</p>
+
+
+          <p>
+            Shadow of the Tomb Raider: Definitive Edition
+            Mientras Lara Croft trata de salvar el mundo de un apocalipsis maya, deberá convertirse en la saqueadora de tumbas que está destinada a ser.
+            En Shadow of the Tomb Raider: Definitive Edition, vive el capítulo final de la historia sobre el origen de Lara, en el que se convierte en la saqueadora de tumbas que está destinada a ser. Esta edición incluye el juego básico y siete tumbas de desafío de contenido descargable, así como armas, atuendos y habilidades descargables. Shadow of the Tomb Raider: Definitive Edition es la opción definitiva para vivir el momento que marcó la vida de Lara.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="c-info" style="position: sticky; top: 0;">
+        <div class="logoJuego" >
+          <img
+            src="{{productoSeleccionado.logoJuego}}">
+        </div>
+
+        <div class="precioJuego">
+          <p class="etiquetaBase">JUEGO BASE</p>
+
+          <div style="display: flex;">
+            <p class="c-descuento">{{productoSeleccionado.discount}}</p>
+            <p style="text-decoration: line-through; color: #8a9a9c;">{{productoSeleccionado.discountedPrice}}</p>
+            <p>208 MXN</p>
+          </div>
+          <p style="font-size: 12px;">La oferta finaliza el 27/06/2024 a las 9:00</p>
+          <button class="btn-compras btn-comprar" type="button" >COMPRAR AHORA</button>
+          <button class="btn-compras btn-addCarrito" type="button" >AÑADIR AL CARRITO</button>
+          <button class="btn-compras btn-addDeseos" type="button"><i style="font-size: 18px;" class="bi bi-plus-circle"></i> A LA LISTA DE DESEOS</button>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="c-valoracion" style="padding-top: 50px;">
+      <h1>Seccion de pruebas Dinamicas con TypeScript :D</h1>
+      <div #elementoContenedorDinamico class="mi-clase-css">
+      </div>
+
+    <button (click)="agregarElemento('Elemento 1')">Agregar elemento</button>
+    <button (click)="agregarElemento('Elemento 2')">Agregar otro elemento</button>
+
+    </div>
+  </div>
+</div> -->
+
+<div class="c-full" [style.background-color]="colorFondos">
+  <div class="detalles-content">
+    <div class="tituloProducto">
+      <h1>{{productoSeleccionado.name}}</h1>
+    </div>
+    <div class="c-categoria">
+      <p id="estrellas-movil">⭐x5</p>
+      <p id="estrellas-pc">⭐⭐⭐⭐⭐</p>
+      <p id="experiencia-juego">Buenas batallas contra jefes</p>
+      <p id="nivel-juego">Ideal para principiantes</p>
+    </div>
+    <div class="c-juego">
+      <div class="c-imgDescripcion">
+        <div class="c-imagenes">
+           <app-juego-carousel></app-juego-carousel>
+        </div>
+        <div class="c-info" style="position: sticky; top: 0;">
+          <div class="logoJuego" >
+            <img
+              src="{{productoSeleccionado.logoJuego}}">
+          </div>
+  
+          <div class="precioJuego">
+            <p class="etiquetaBase">JUEGO BASE</p>
+  
+            <div style="display: flex;">
+              <p class="c-descuento">{{productoSeleccionado.discount}}</p>
+              <p style="text-decoration: line-through; color: #8a9a9c;">{{productoSeleccionado.discountedPrice}}</p>
+              <p>208 MXN</p>
+            </div>
+            <p style="font-size: 12px;">La oferta finaliza el 27/06/2024 a las 9:00</p>
+            <button class="btn-compras btn-comprar" type="button" >COMPRAR AHORA</button>
+            <button class="btn-compras btn-addCarrito" type="button" >AÑADIR AL CARRITO</button>
+            <button class="btn-compras btn-addDeseos" type="button"><i style="font-size: 18px;" class="bi bi-plus-circle"></i> A LA LISTA DE DESEOS</button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="c-descripcion">
+
+        <p>En Shadow of the Tomb Raider: Definitive Edition, vive el capítulo final de la historia sobre el origen de Lara, en el que se convierte en la saqueadora de tumbas que está destinada a ser.</p>
+
+
+        <p>
+          Shadow of the Tomb Raider: Definitive Edition
+          Mientras Lara Croft trata de salvar el mundo de un apocalipsis maya, deberá convertirse en la saqueadora de tumbas que está destinada a ser.
+          En Shadow of the Tomb Raider: Definitive Edition, vive el capítulo final de la historia sobre el origen de Lara, en el que se convierte en la saqueadora de tumbas que está destinada a ser. Esta edición incluye el juego básico y siete tumbas de desafío de contenido descargable, así como armas, atuendos y habilidades descargables. Shadow of the Tomb Raider: Definitive Edition es la opción definitiva para vivir el momento que marcó la vida de Lara.
+        </p>
+      </div>
+
+    </div>
+
+
+    
+  </div>
+</div>
+
+
+<!-- Pruebas de typescript y comentarios :D -->
+
+<!-- <div class="c-valoracion" style="padding-top: 50px;">
+      <h1>Seccion de pruebas Dinamicas con TypeScript :D</h1>
+      <div #elementoContenedorDinamico class="mi-clase-css">
+      </div>
+
+      <button (click)="agregarElemento('Elemento 1')">Agregar elemento</button>
+      <button (click)="agregarElemento('Elemento 2')">Agregar otro elemento</button>
+    </div> -->
+
+
+
+<!-- <div class="cont-padre">
+  <div class="contenedor">
+      <hr>
+      <div class="product-reviews">
+          <h3>Comentarios</h3>
+          <div class="review">
+              <div class="review-header">
+                  <p class="review-user">Usuario 1</p>
+                  <p class="review-rating">⭐️⭐️⭐️⭐️⭐️</p>
+              </div>
+              <p class="review-text">Excelente producto. Muy satisfecho.</p>
+              <div class="btnResponsivo">
+                  <button id="btn-verde" class="like-button">👍</button>
+                  <button id="btn-rojo" class="dislike-button">👎</button>
+              </div>
+          </div>
+          <div class="review">
+              <div class="review-header">
+                  <p class="review-user">Usuario 2</p>
+                  <p class="review-rating">⭐️⭐️⭐️</p>
+              </div>
+              <p class="review-text">Buen producto, pero podría mejorar en...</p>
+              <div class="btnResponsivo">
+                  <button id="btn-verde" class="like-button">👍</button>
+                  <button id="btn-rojo" class="dislike-button">👎</button>
+              </div>
+          </div>
+      </div>
+      <hr>
+      <div class="product-reviews">
+          <h4>Comenta que te pareció el producto</h4>
+          <div class="review">
+              <div class="review-header">
+                  <textarea name="" class="cont_textarea"  style="width: 100%; padding: 20px; height: 120px;" placeholder="Escribe algo :D"></textarea>
+              </div>
+
+          </div>
+      </div>
+  </div>
+</div> -->
+

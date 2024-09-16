@@ -1,0 +1,66 @@
+<div class="modal-container" [ngClass]="{'show': isVisible}" (click)="closeModal()">
+  <div class="modal-contenedor" (click)="$event.stopPropagation()">
+    <div class="div-titulo-cesta">
+      <span class="btn-cerrar" (click)="closeModal()">&times;</span>
+      <h1 id="h1-titulo">Mi cesta de productos pendiente :)</h1>
+    </div>
+    <p id="subtitulo-cesta"> {{cestaVacia ? 'No Tienes ningún Producto aquí' : ''}}</p>       
+    <i id="iconos_cesta" [ngClass]="cestaVacia ? 'fi fi-sr-shopping-cart-add' : 'noseComoPeroFunciona' "></i>
+    <div id="cesta-Pedidos-container">
+
+      <ul id="cont-juego" *ngFor="let itemCesta of dataCesta">
+        <!-- <li >
+          Titulo: {{itemCesta.juego}},<br>
+          Costo: ${{itemCesta.costo}},<br>
+          Descuento: {{itemCesta.loMenos}}%,<br>
+        </li>
+        <img id="imagen-cesta" [src]="itemCesta.imagen" alt="producto en la cesta de compras"> -->
+
+
+
+        <div class="c-p-img">
+          <div class="div-img">
+            <img class="img-juego-carrusel" [src]="itemCesta.imagen" [alt]="itemCesta.juego" />
+          </div>
+
+        </div>
+        <div class="info" style=" width: 100%;">
+          <!-- <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product.category }}</p> -->
+          <p style="font-size: 14px;">{{ itemCesta.juego }}</p>
+          <div class="precios">
+            <div class="c-descuento">
+              <p class="p-descuento" >{{ itemCesta.loMenos }} %</p>
+            </div>
+            <div class="c-cantidad">
+              <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ itemCesta.costo }} MXN</p>
+              <p>{{ itemCesta.costo }} MXN</p>
+            </div>
+          </div>
+        </div>
+
+
+
+      </ul>
+    </div>
+
+      <div id="div-totalCesta">
+        <p id="total-cesta"> {{ cestaVacia ? '' : 'Precio Total: $' + dataCostoTotal }}</p>
+      </div>
+    <p id="mensaje-cesta"> {{cestaVacia ? 'Agrega algún producto' : ''}}</p>       
+  </div>
+</div>
+
+
+
+
+
+  <!-- <p>cesta-modal works!</p> -->
+<!-- <div class="modal" [ngClass]="{'show': isVisible}" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <ng-content></ng-content>
+  </div>
+</div> -->
+
+<!-- ngContent => Esto permite insertar contenido dinámico dentro del modal-->
+  

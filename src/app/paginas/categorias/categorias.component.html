@@ -1,0 +1,143 @@
+<div class="c-full" >
+    <div class="c-medium">
+        <div class="c-titulo">
+            <p>Categorías</p>
+        </div>
+        <div class="c-categorias">
+            <!-- <a (click)="verCategoria(cat.id)" class="c-tipo"  *ngFor="let cat of categorias_info"> -->
+            <a (click)="verCategoria(cat.categoria)" class="c-tipo"  *ngFor="let cat of categorias_info">
+                <div class="c-categoria-imagen">
+                    <img [src]="cat.imagen" [alt]="cat.categoria">
+                     <div class="c-fondo">
+                         <p>{{cat.leyenda}}</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>{{cat.categoria}}</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div class="c-full" >
+    <div class="c-medium">
+        <div class="c-titulo">
+            <p>Categorías</p>
+        </div>
+        <div class="c-categorias">
+            <div class="c-tipo">
+                <div class="c-categoria-imagen">
+                    <img src="assets/imagenes/accion0.jpg" alt="">
+                     <div class="c-fondo">
+                         <p>¡Prepárate para la adrenalina! Sumérgete en un mundo de acción trepidante y combate sin fin</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>Acción</p>
+                </div>
+            </div>
+
+            <div class="c-tipo">
+                <div class="c-categoria-imagen">
+                    <img src="assets/imagenes/aventura.jpg" alt="">
+                     <div class="c-fondo">
+                         <p>Embárcate en una travesía épica llena de descubrimientos y peligros inimaginables</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>Aventura</p>
+                </div>
+            </div>
+
+            <div class="c-tipo">
+                <div class="c-categoria-imagen">
+                    <img src="assets/imagenes/deporte.jpg" alt="">
+                     <div class="c-fondo">
+                         <p>Siente la emoción de la competencia y la pasión por el deporte en cada partida</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>Deporte</p>
+                </div>
+            </div>
+
+            <div class="c-tipo">
+                <div class="c-categoria-imagen">
+                    <img src="assets/imagenes/terror.jpg" alt="">
+                     <div class="c-fondo">
+                         <p>Atrévete a enfrentar tus miedos más profundos en una atmósfera escalofriante y llena de suspenso</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>Terror</p>
+                </div>
+            </div>
+
+            <div class="c-tipo">
+                <div class="c-categoria-imagen">
+                    <img src="assets/imagenes/rol1.jpg" alt="">
+                     <div class="c-fondo">
+                         <p>Forja tu propio destino en un universo de fantasía donde cada decisión cuenta.</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>Rol</p>
+                </div>
+            </div>
+
+            <div class="c-tipo">
+                <div class="c-categoria-imagen">
+                    <img src="assets/imagenes/peleas0.jpg" alt="">
+                     <div class="c-fondo">
+                         <p>¡No hay piedad! ¡Acaba con tus enemigos y reclama la victoria!</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>Combate</p>
+                </div>
+            </div>
+            <div class="c-tipo">
+                <div class="c-categoria-imagen">
+                    <img src="assets/imagenes/carreras0.jpg" alt="">
+                     <div class="c-fondo">
+                         <p>¡Prepárate para pisar el acelerador y desafiar a tus rivales en carreras vertiginosas!</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>Carreras</p>
+                </div>
+            </div>
+
+            <div class="c-tipo">
+                <div class="c-categoria-imagen">
+                    <img src="assets/imagenes/accion4.jpg" alt="">
+                     <div class="c-fondo">
+                         <p>Prepárate para superar obstáculos y trampas desafiantes. ¡Tu agilidad será tu mejor aliada!</p>
+                    </div>
+                </div>
+
+                <div class="c-nombre-categoria">
+                    <p>Simulación</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+
+<!-- 
+    <div class="image-container"  style="background-image: url('assets/imagenes/terror.jpg');">
+        <div class="overlay"></div>
+    </div> -->

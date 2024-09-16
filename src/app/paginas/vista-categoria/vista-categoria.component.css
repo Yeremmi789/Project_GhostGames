@@ -1,0 +1,130 @@
+:root {
+    --clr-letra-blanco: #ffff;
+    --clr-letra-negro: #0000;
+    --main-bg-color: brown;
+    --color-principal: #F00; /* Definición de la variable */
+  }
+  
+
+.c-full{
+    display: flex;
+    width: 100%;
+    height: auto;
+    /* background-color: red; */
+}
+
+.c-medium{
+    display: flex;
+    width: 80%;
+    height: auto;
+    /* background-color: blue; */
+
+}
+.c-titulo{
+    display: flex;
+    width: 100%;
+    height: auto;
+    z-index: 20;
+    justify-content: center;
+    padding: 30px 0;
+}
+.c-titulo p{
+    color: #ffff;
+    font-size: 46px;
+}
+
+.juegosCategoria{
+    display: flex;
+    width:100%;
+    height: auto;
+    /* background-color: green; */
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.juego{
+    display:flex;
+    width:15%;
+    /* height: auto; */
+    /* max-height: 500px; */
+    flex-wrap: wrap;
+    margin: 0 0.7% 20px 0.7%;
+
+    justify-content: center;
+}
+
+.cont-img{
+    display: flex;
+    /* width: 80%; */
+    width: 100%;
+    /* height: 65%; */
+    /* height: 55%; */
+    max-height: 250px;
+    min-height: 250px;
+}
+
+.cont-img img{
+    /* width: 100%; */
+    width: 100%;
+    height: auto;
+}
+
+/* .cont-img:hover img{ */
+.cont-img:hover{
+    /* transform: scale(1.1); */
+    transition: all 1000ms;
+    border: 2px solid #0075e5;
+    box-shadow: 0 0 30px rgba(0, 117, 229, 0.5);
+    /* box-shadow (que tan alejado esta de cada esquina izquierda - derecha) (alcance abajo) (Alcance del desvanecido)*/
+
+}
+
+
+.cont-informacion{
+    /* padding-top: 5px; */
+    /* display: flex; */
+    width: 100%;
+}
+
+.juego p{
+    color: #ffff;
+}
+
+
+.info {
+    background-color: #131312;
+    color: #ffff;
+    width: 100%;
+  }
+  
+  .info p {
+    padding-top: 10px;
+    /* font-size: 14px; */
+    font-family: sans-serif;
+    line-height: 20px;
+  }
+  
+  .precios {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .c-descuento {
+    /* background-color: blue; */
+    width: 50%;
+    display: flex;
+    align-items: center;
+  }
+  
+  .c-cantidad {
+    width: 50%;
+    /* display: flex;
+    justify-content: flex-end; */
+  }
+  
+  .c-cantidad p{
+    font-size: 15px;
+    /* font-weight: 550; */
+    display: flex;
+    justify-content: end;
+  }

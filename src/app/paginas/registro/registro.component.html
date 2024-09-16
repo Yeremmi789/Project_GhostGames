@@ -1,0 +1,77 @@
+<div class="body">
+  <div class="c-completo">
+    <div class="c-medios">
+
+      <form [formGroup]="registroForm" (ngSubmit)="enviar()" class="cont-hijo" id="formulario" method="POST">
+        <div class="marca">
+          <img src="./../../../assets/Logo0.png" alt="">
+          <h1>GhostGames</h1>
+        </div>
+        <h2 id="login">Sing-Up</h2>
+        <div class="cont-nieto">
+          <label for="">Usuario</label>
+          <input formControlName="i_usuario" type="text" placeholder="Usuario" name="usuario" id="usuario">
+          <br>
+          <div *ngIf="registroForm.get('i_usuario') ?.touched">
+            <p *ngIf="registroForm.get('i_usuario')?.errors?.['minlength']" class="i_invalido">El minimo son 3 letras</p>
+          </div>
+
+        </div>
+        <div class="cont-nieto">
+          <label for="">Correo</label>
+          <input formControlName="i_correo" type="email" placeholder="Correo" name="correo" id="correo">
+          <br>
+          <div *ngIf="registroForm.get('i_correo') ?.touched">
+            <p *ngIf="registroForm.get('i_correo')?.errors?.['required']" class="i_invalido">El campo es obligatorio</p>
+            <p *ngIf="registroForm.get('i_correo')?.errors?.['email']" class="i_invalido">El correo no es válido</p>
+            <p *ngIf="registroForm.get('i_correo')?.errors?.['pattern']" class="i_invalido">Solo se aceptan correos con terminación: .com .es .mx</p>
+            <p *ngIf="registroForm.get('i_correo')?.valid" class="i_valido">El correo es CORRECTO</p>
+          </div>
+        </div>
+        <div class="cont-nieto">
+          <label for="">Contraseña</label>
+          <input formControlName="i_contrasenia" [type]="mostrarPassword ? 'text' : 'password'" type="password" placeholder="Contraseña1" name="contraseña1" id="contraseña1">
+          <br>
+          <div *ngIf="registroForm.get('i_contrasenia') ?.touched">
+            <p *ngIf="registroForm.get('i_contrasenia')?.errors?.['required']" class="i_invalido">El campo es obligatorio</p>
+            <p *ngIf="registroForm.get('i_contrasenia')?.errors?.['minlength']" class="i_invalido">Minimo deben ser 8 caracteres</p>
+            <p *ngIf="registroForm.get('i_contrasenia')?.errors?.['pattern']" class="i_invalido">Almenos una letra mayuscula, numero y simbolo</p>
+            <p *ngIf="registroForm.get('i_contrasenia')?.valid" class="i_valido">Igual o mayor a 8 caracteres :D</p>
+          </div>
+          <div style="display: flex; width: 100%; align-items: center;">
+            <button id="btnVerPassword" type="button" (click)="verPassword()">
+              <i [ngClass]="mostrarPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+            <span class="password-toggle-text">{{ mostrarPassword ? 'Ocultar contraseña' : 'Mostrar contraseña' }}</span>
+          </div>
+
+        </div>
+        <div class="cont-nieto">
+          <label for="">Verificar contraseña</label>
+          <input formControlName="i_ver_contrasenia" [type]="mostrarPassword2 ? 'text' : 'password'" type="password" placeholder="Verificar contraseña" name="contraseña2" id="contraseña2">
+          <br>
+          <div *ngIf="registroForm.get('i_ver_contrasenia')?.touched">
+            <p *ngIf="registroForm.get('i_ver_contrasenia')?.errors?.['required']" class="i_invalido">El campo es obligatorio</p>
+            <p *ngIf="registroForm.errors?.['passwordRespuesta']" class="i_invalido">Las contraseñas no coinciden</p>
+            <p *ngIf="!registroForm.errors?.['passwordRespuesta'] && registroForm.get('i_ver_contrasenia')?.valid" class="i_valido">Las contraseñas coinciden :D</p>
+          </div>
+          <div style="display: flex; width: 100%; align-items: center;">
+            <button id="btnVerPassword" type="button" (click)="verPassword2()">
+              <i [ngClass]="mostrarPassword2 ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+            <span class="password-toggle-text">{{ mostrarPassword2 ? 'Ocultar contraseña' : 'Mostrar contraseña' }}</span>
+          </div>
+        </div>
+        
+        <div class="cont-nieto" id="c-btnSubmit">
+          <button type="submit" name="submit" [disabled]="registroForm.invalid || registroForm.hasError('passwordRespuesta')">Registrarme</button>
+        </div>
+        <div class="helpme">
+          <a href="">Ayuda / Mapa del sitio</a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>

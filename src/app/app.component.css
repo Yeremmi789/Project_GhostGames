@@ -1,0 +1,324 @@
+
+nav{
+  display: flex;
+  /* justify-content: space-between; */
+  height:10%;
+  /* font-family: Inter, sans-serif; */
+  font-family: 'Oswald', sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgb(29, 29, 29);
+  padding:0 0 0 10px;
+
+}
+
+.nav-movil{
+  display: none;
+}
+
+.l_size1{
+  /* color: red; */
+  font-size: 15px;
+}
+
+nav a{
+  text-decoration: none;
+  padding: 0 30px 0 10px;
+}
+
+#separador-nav{
+  width: 30%;
+  display: flex;
+  /* background: blue; */
+  align-items: center;
+}
+
+#cont-master img{
+  width: 14%;
+  padding: 5px 10px;
+}
+
+li{
+  text-decoration: none;
+  list-style: none;
+  display: inline-block;
+}
+ul{
+  display: inline-block;
+  width:auto;
+  height:auto;
+}
+
+
+#cont-ul{
+  width: 60%;
+  height: auto;
+  /* background: green; */
+  display: flex;
+  justify-content: end;
+}
+
+#cont-ul li{
+  display: flex;
+  margin: 5px 5px;
+  align-items: center;
+  padding-left: 10px;
+  justify-content: center;
+  /* background: green; */
+}
+
+#cont-ul a{
+  width: 100%;
+  height: 40%;
+  display: flex;
+  align-items: center;
+
+  display: flex;
+  align-items: center;
+  padding: 5px 15px;
+}
+
+#cont-ul a:hover {
+  
+  color: white;
+  transform: scale(1.1);
+
+  transition: all 300ms;
+  border-bottom: 5px solid #ffff;
+
+}
+
+.cont-user{
+  display: flex;
+    width: 10%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+#foto-user img{
+  width: 60%;
+  position: relative;
+  left: 20%;
+}
+
+
+#menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 40px;
+  cursor: pointer;
+}
+
+#btn-user {
+  width: 45px;
+  height: 45px;
+  border: 0px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  overflow: hidden; /* Esto hace que las esquinas sean no clicables */
+  background-color: var(---btn-azulCielo);
+  background-color: #06686a;
+}
+
+#icon-user{
+  font-size: 25px;
+  color: var(---txt-blanco);
+  /* padding: 2px; */
+}
+
+
+#btn-user img {
+  width: 100%;
+  height: 100%;
+  border: 0px solid;
+}
+
+/* Carrito Botón */
+#cesta-div{
+  position: relative;
+  left: 10%;
+}
+
+#btn-icon{
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 0px solid;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(---btn-flechas2);
+}
+
+.cesta-icono{
+  font-size: 25px;
+  color: var(---btn-morado);
+}
+
+#cesta-cantidad{
+  position: absolute;
+  font-size: 20px;
+  color: var(---txt-blanco);
+  background-color: var(---btn-morado);
+  border-radius: 50%;
+  width: 18px;
+  height: 20px;
+  right: 1%;
+}
+
+
+@media screen and (max-width: 600px) {
+  
+
+  
+
+  nav{
+    width: 80%;
+    height: auto;
+    height: 100vh;
+    flex-wrap: wrap;
+    justify-content: start;
+    /* background-color: red; */
+    flex-direction: column;
+
+    /* position: absolute; */
+    /* left: -80%; */
+    top: 0%;
+  }
+  nav a{
+    font-family: 'Oswald', sans-serif;
+
+  }
+
+  nav li a{
+    font-weight: 300;
+  }
+  
+  .nav-movil{
+    display: flex;
+    width: 100%;
+    background-color: rgb(29, 29, 29);
+    height:10%;
+    align-items: center;
+    /* font-family: 'Oswald', sans-serif; */
+
+  }
+
+  .nav-movil a{
+    text-decoration: none;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .logo{
+    width: 100%;
+    display: flex;
+    /* background: blue; */
+    align-items: center;
+    justify-content: center;
+  }
+
+  .nav-movil img{
+    width: 14%;
+    padding: 5px 10px;
+  }
+
+  .icono-menu{
+    display: inline-block;
+    width: 80px;
+    height: auto;
+    position: absolute;
+    z-index: 40;
+  }
+
+  #menu-toggle {
+    display: block;
+    margin: 0 45px 0 15px;
+    background-color: rgb(29, 29, 29);
+    /* quitar solamente si se quiere quitar el fixed */
+    position: fixed;
+    top: 0%;
+    margin: 0 35px 0 0px;
+    width: 20%;
+    padding: 0 0 5px 0;
+    /* quitar solamente si se quiere quitar el fixed */
+  }
+
+  .menu-derecha{
+  position: fixed;
+  left: 80%;
+  top: 0.5%;
+  z-index: 40;
+  }
+
+  /* .menu-izquierda{
+  left: -80%;
+  } */
+
+.hide-menu {
+  position: absolute;
+  left: -80%;
+  transition: left 0.3s ease-in-out;
+  z-index: 40;
+}
+
+.show-menu {
+  position: absolute;
+  left: 0;
+  transition: left 0.3s ease-in-out;
+  position: fixed;
+  z-index: 40;
+}
+
+  #separador-nav{
+    width: 100%;
+    /* display: none; */
+    align-items: start;
+    padding-top: 20px;
+}
+
+  ul{
+    display: flex;
+    flex-direction: column;
+    /* background-color: red; */
+    width: 100%;
+  }
+
+  #cont-ul{
+    width: 100%;
+    justify-content: start;
+
+  }
+ 
+  li{
+    width: 100%;
+    /* background-color: blue; */
+    margin: 0;
+    padding-left: 0px;
+
+  }
+
+  #cont-ul li{
+    margin: 0;
+  }
+
+  #cont-ul a{
+    padding: 15px 10px;
+    width: 100%;
+  }
+
+
+  #cont-ul a:hover {
+    transform: scale(1);
+    background-color: rgba(255, 255, 255, 0.323);
+
+  }
+
+}

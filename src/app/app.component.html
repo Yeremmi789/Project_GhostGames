@@ -1,0 +1,86 @@
+<div class="nav-movil">
+  <div class="icono-menu">
+    <button #botonToggle id="menu-toggle" [ngClass]="{'menu-derecha': menuVisible}" aria-label="Toggle Menu" (click)="toggleMenu()">
+      &#9776; <!-- Ícono de menú hamburguesa -->
+    </button>
+  </div>
+  <div class="logo">
+    <img src="./../../../assets/Logo0.png" alt="">
+    <!-- <p class="link-blanco" style="font-size: 30px; color: rgb(56, 56, 56);"> | </p> -->
+    <a class="link-blanco name_sitio" routerLink=""> GhostGames</a>
+  </div>
+  <div class="iconos">
+
+  </div>
+</div>
+
+
+
+<nav #navToggle [ngClass]="{ 'show-menu': menuVisible, 'hide-menu': !menuVisible }" id="cont-master" >
+  <div id="separador-nav">
+    <img src="./../../../assets/Logo0.png" alt="">
+    <p class="link-blanco" style="font-size: 30px; color: rgb(56, 56, 56);"> | </p>
+    <a class="link-blanco name_sitio" routerLink="">GhostGames</a>
+    <!-- <a class="link-blanco name_sitio" routerLink="">GhostGames</a> -->
+  </div>
+  <ul id="cont-ul">
+    
+    <li><a class="link-blanco l_size1" routerLink="/inicio">Inicio</a></li>
+    <li><a class="link-blanco l_size1" href="/productos">Productos</a></li>
+    <li><a class="link-blanco l_size1" href="">Galería</a></li>
+    <li><a class="link-blanco l_size1" href="">Soporte</a></li>
+    <li><a class="link-blanco l_size1" href="/contacto">Contacto</a></li>
+
+
+    <li *ngIf="!logeado"><a class="link-blanco l_size1" href="/registro">Registro</a></li>
+    <li *ngIf="!logeado"><a class="link-blanco l_size1" href="/login">Iniciar Sesión</a></li>
+    <li *ngIf="logeado" (click)="salirUsuario()"><a class="link-blanco l_size1" href="/">Salir</a></li>
+
+  </ul>
+  <!-- Mostrar este icono cuando se tengan las sesiones -->
+  <div *ngIf="logeado" class="cont-user">
+    <button (click)="alerta()" id="btn-user" ><i id="icon-user" class="fi fi-sr-user"></i></button>
+     <span>|| </span>
+    <button id="btn-icon" class="link-blanco" (click)="showModal()">
+      <i class="fi fi-sr-shopping-cart cesta-icono" ></i>
+      <span id="cesta-cantidad"> {{cantidadCesta}}</span>
+    </button>
+  </div>
+</nav>
+
+<app-cesta-modal [isVisible]="isVisible" (onClose)="handleClose()">
+  <!-- <h2>{{ modalTitle }}</h2> -->
+  <!-- <p>{{ modalContent }}</p> -->
+  <button (click)="onConfirm()">Confirmar</button>
+  <button (click)="onCancel()">Cancelar</button>
+</app-cesta-modal>
+
+
+
+<app-buscador *ngIf="mostrarBusquedaComponent"></app-buscador>
+
+<router-outlet></router-outlet>
+
+<!-- <app-producto-carousel></app-producto-carousel> -->
+
+
+<!-- <app-carousel-v1></app-carousel-v1> -->
+
+
+<app-footer></app-footer>
+
+
+<!-- Prueba de cerrar menú al dar clic afuera -->
+
+<!-- <button #toggleButton (click)="menus()"> Toggle Menu</button>
+
+<div class="menu" *ngIf="isMenuOpen" #menu>
+I'm the menu. Click outside to close me
+</div> -->
+
+
+<!-- NOTAS - PENDIENTES POR REALIZAR EN app.component.html,.ts,.css,routes...
+
+1.-Crear un componente para la barra de navegación
+
+-->

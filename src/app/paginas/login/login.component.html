@@ -1,0 +1,50 @@
+<div class="body">
+  <div class="c-completo">
+    <div class="c-medios">
+
+      <form [formGroup]="loginForm" class="cont-hijo" id="formulario" (ngSubmit)="verificarDatos()">
+        <div class="marca">
+          <img src="./../../../assets/Logo0.png" alt="">
+          <h1>GhostGames</h1>
+        </div>
+        <h2 id="login">Login</h2>
+        <!-- <div class="cont-nieto">
+          <label for="">Usuario</label>
+          <input type="text" placeholder="Usuario" name="usuario" id="usuario">
+          <br>
+        </div> -->
+        <div class="cont-nieto">
+          <label for="">Correo</label>
+          <input formControlName="i_correo" type="email" placeholder="Correo" name="correo" id="correo">
+          <br>
+
+        </div>
+        <div class="cont-nieto">
+          <label for="">Contraseña</label>
+          <input formControlName="i_password" [type]="mostrarPassword ? 'text' : 'password' " type="password" placeholder="Contraseña1" name="contraseña1" id="contraseña1">
+          <br>
+          <div style="display: flex; width: 100%; align-items: center;">
+            <button id="btnVerPassword" type="button" (click)="verPassword()">
+              <i [ngClass]="mostrarPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+            <span class="password-toggle-text">{{ mostrarPassword ? 'Ocultar contraseña' : 'Mostrar contraseña' }}</span>
+          </div>
+
+        </div>
+        <!-- <div class="cont-nieto">
+          <label for="">Verificar contraseña</label>
+          <input type="password" placeholder="Verificar contraseña" name="contraseña2" id="contraseña2">
+          <br>
+        </div> -->
+        <div class="cont-nieto" id="c-btnSubmit">
+          <button type="submit" name="submit">Registrarme</button>
+        </div>
+        <div class="helpme">
+          <a href="">Ayuda / Mapa del sitio</a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>

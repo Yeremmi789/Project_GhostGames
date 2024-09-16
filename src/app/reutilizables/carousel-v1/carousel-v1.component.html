@@ -1,0 +1,16 @@
+
+
+<h1>Carousel Version 1</h1>
+<div class="carousel-container">
+  <button (click)="prev()" class="carousel-button prev-button">&lt;</button>
+
+  <div class="carousel" [style.transform]="'translateX(' + translateX + 'px)'">
+    <div class="carousel-item" *ngFor="let product of products">
+      <img [src]="product.image" [alt]="product.name" />
+      <h3>{{ product.name }}</h3>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+
+  <button (click)="next()" class="carousel-button next-button">&gt;</button>
+</div>

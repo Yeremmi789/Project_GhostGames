@@ -1,0 +1,381 @@
+:root{
+  ---link_titulo: #ffff;
+  --subtitulo: #121313;
+}
+
+.carousel-container {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+#btn-agragar{
+  background-color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  border: 0px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+#btn-agragar2{
+  background-color: rgba(255, 255, 255, 0.5);
+  background-color: transparent;
+  width: 80px;
+  height: 40px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+#btn-agragar:hover{
+  /* background-color: rgba(255, 255, 255, 1); */
+  transition: ease-out 200ms;
+  cursor: pointer;
+}
+
+
+#color-icono{
+  color: black;
+  color: #ffff;
+  color: blueviolet;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+#color-icono2{
+  color: black;
+  font-size: 30px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+#color-icono:hover{
+  color: black;
+  color: blueviolet;
+  color: white;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+
+
+
+.carousel-item {
+  min-width: 300px;
+  margin: 0 15px;
+  text-align: center;
+}
+
+.carousel-item img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.img-juego-carrusel{
+  /* height: 240px; */
+  width: 100%;
+  object-fit: cover;
+}
+
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  border: none;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.prev-button {
+  left: 0;
+  z-index: 10;
+}
+
+.next-button {
+  right: 0;
+  z-index: 10;
+
+}
+
+
+
+
+/* sdsadasdsa */
+
+
+* {
+  font-family: sans-serif;
+}
+
+
+.c-medium-carrusel{
+  width: 78.5%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.c-titulo-productos {
+  width: 100%;
+  height: 30px;
+  /* background-color: chocolate; */
+  margin: 20px 10px;
+  color: rgb(245, 245, 245);
+  font-size: 18px;
+}
+
+.encabezado-carrusel{
+  display: flex;
+  justify-content: space-between;
+}
+
+.div-encabezado-carrusel{
+width: 50%;
+}
+
+.div-flechas-carrusel{
+  width: 50%;
+  display: flex;
+  justify-content: end;
+}
+
+.link_t_productoV1{
+  /* list-style: none; */
+  text-decoration: none;
+  color: var(---link_titulo);
+}
+
+.link_t_productoV1:hover{
+  cursor: pointer;
+}
+
+.carousel-wrapper {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carrusel-content{
+  position: relative;
+  /* width: 80%; */
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+  /* width: 100%; */
+}
+
+
+
+.c-product{
+  /* width: 20%; */
+  /* height: auto; */
+  width: 198px;
+  height: 410px;
+  /* margin: 0 10px; */
+  margin: 0 7px;
+  flex-shrink: 0;
+
+}
+
+.carrusel-juego {
+  display: flex;
+  margin: 0 8px; /* Margen más grande */
+  min-width: calc(100% / 6 - 16px); /* Resta el margen a la anchura de cada elemento */
+  flex-direction: column; /* Coloca la imagen y la info en columna */
+  flex-wrap: wrap;
+
+  /* esto de aqui se puso porque la etiqueta paso de <a> - <buttton>, si solo se pone <a> quitar esto */
+  background-color: transparent;
+  border: 0px solid;
+
+}
+
+.categoria-juego{
+  color: #777677; 
+  font-size: 9px;
+  line-height: 15px;
+  font-weight: 800;
+}
+
+
+
+.info p{
+  text-align: start;
+}
+
+.c-product:hover{
+  cursor: pointer;
+
+}
+
+.c-p-img.hovered {
+  border: 2px solid #0075e5; /* Ejemplo de estilo: borde azul */
+  box-shadow: 0 0 10px rgba(0, 117, 229, 0.5); /* Ejemplo de estilo: sombra azul */
+}
+
+
+.div-img {
+  position: relative;
+}
+
+.div-img img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: all 0.3s ease;
+}
+
+.div-img::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.6); /* White overlay with 60% opacity */
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.div-img.hovered::after {
+  opacity: 1;
+}
+
+
+.c-product.active {
+  opacity: 1;
+}
+
+.c-product img {
+  width: 100%;
+  height: auto;
+}
+
+.info {
+  background-color: #131312;
+  color: #ffff;
+}
+
+.info p {
+  padding-top: 10px;
+  /* font-size: 14px; */
+  font-family: sans-serif;
+  line-height: 20px;
+}
+
+.precios {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.c-descuento {
+  /* background-color: blue; */
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.p-descuento{
+  background-color: #0075e5;;
+  background-color: #15F7FC;
+  background-color: #4dd2d4;
+  background-color: blueviolet;
+  background-color: #39a0a2;
+
+  font-size: 10px;
+  padding: 6px;
+  border-radius: 4px;
+  font-weight: 800;
+  /* color: #202121; */
+  /* color: rgb(110, 1, 110); */
+}
+
+.c-cantidad {
+  width: 50%;
+  /* display: flex;
+  justify-content: flex-end; */
+}
+
+.c-cantidad p{
+  font-size: 15px;
+  font-size: 14px;
+  /* font-weight: 550; */
+  display: flex;
+  justify-content: end;
+}
+
+
+
+.icon-flecha-producto{
+  /* background-color: rgb(143, 143, 143); */
+  border-radius: 40px;
+  font-size: 20px;
+  color: #ffff;
+  height: 20px;
+}
+
+.btn-flechas{
+  background: #202121; /* Fondo transparente */
+  backdrop-filter: blur(5px); /* Desenfoque */
+  -webkit-backdrop-filter: blur(10px); /* Desenfoque para Safari */
+  width: 35px;
+  height: 35px;
+  border-radius: 50px;
+  border: 1px solid #202121;
+  margin: 5px 0px;
+  margin-right: 10px;
+
+}
+
+
+.btn-flechas:hover{
+  background: rgba(249, 249, 249, 0.794); /* Fondo transparente */
+  cursor: pointer;
+  border: 1px solid #ffff;
+}
+
+
+@media screen and (max-width: 600px) {
+
+  .c-medium-carrusel{
+    width: 90%;
+    height: auto;
+  }
+
+  .encabezado-carrusel{
+    /* justify-content: stretch; */
+  }
+
+  .div-encabezado-carrusel{
+    width: 70%;
+  }
+  
+  .div-flechas-carrusel{
+    width: 30%;
+  }
+
+  .carrusel-content{
+    width: 100%;
+  }
+  .carrusel-juego {
+    margin: 0 5px;    
+    min-width: calc(100% / 3 - 10px); /* Ajuste del ancho */
+  }
+
+}
