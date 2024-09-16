@@ -50,7 +50,7 @@ import { AutenticacionService } from './servicios/autenticacion.service';
 })
 
 export class AppComponent implements OnInit{
-  title = 'ghostgamesfrontend';
+  title = 'project_ghostgames';
 
   menuVisible = false;
   usuarioRegistrado:boolean = false;
