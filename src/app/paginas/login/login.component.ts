@@ -19,8 +19,8 @@ export class LoginComponent {
 
   mostrarPassword:boolean = false;
   loginForm!:FormGroup;
-  i_correo:string = "";
-  i_password:string = "";
+  correo:string = "";
+  password:string = "";
   infoLS:boolean = false;
 
   constructor(
@@ -44,10 +44,26 @@ export class LoginComponent {
 
   formulario(){
     this.loginForm = this.fb.group({
-      i_correo: this.i_correo,
-      i_password: this.i_password,
+      correo: [''],
+      password: [''],
     });
   }
+
+
+  login(): any {
+
+    if (this.loginForm.invalid) {
+      alert("Los campos son invalidos");
+    }else{
+      const {correo,password} = this.loginForm.value;
+      this.autenticacionService.login(correo, password).subscribe(res => {
+        console.log('Login exitoso');
+        this.router.navigateByUrl('/');
+        console.log(res);
+      });
+    }
+  }
+
 
   verificarDatos(){
 

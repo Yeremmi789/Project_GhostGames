@@ -4,6 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 
 import { GalleryModule, ImageItem, GalleryComponent, Gallery, GalleryImageDef, VideoItem, YoutubeItem, IframeItem } from 'ng-gallery';
 import { Lightbox } from 'ng-gallery/lightbox';
+import { IF_galeriaCarrusel } from 'src/app/interfaces/juegoGaleriaData';
+import { JuegosService } from 'src/app/servicios/juegos.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -25,6 +28,8 @@ export class JuegoCarouselComponent implements OnInit{
   @ViewChild(GalleryComponent) g_Component!: GalleryComponent;
   @ViewChild(GalleryImageDef) img_Def!: GalleryImageDef;
 
+  private if_carrusel!:IF_galeriaCarrusel;
+
   elementos: ImageItem[] = [];
 
   galeria_id = 'lightbox';
@@ -35,10 +40,18 @@ export class JuegoCarouselComponent implements OnInit{
     private lightbox: Lightbox,
 
     private rou:ActivatedRoute,
+
+    // API GALERIA
+    private sv_galeria:JuegosService
   ){}
   datos:any;
   productoSeleccionado:any; //Definir el tipo de dato de cada producto
 
+  // API VARIABLES
+  api_imagenes:any
+
+  private STORAGE_URL = environment.apiStorage; //http://localhost:8000/storage/
+  private GG_API = environment.apiRest; //http://localhost:8000/api/
   ngOnInit(): void {
 
 
@@ -48,75 +61,71 @@ export class JuegoCarouselComponent implements OnInit{
       const prod_ID = +parametro['id'];
       // this.productoSeleccionado = this.obtenerProductoPorId(prod_ID);
 
+      this.getGaleriaJuego(prod_ID);
 
-      if(prod_ID == 1){
-        this.elementos = [
-        // new ImageItem({ src: 'assets/carousel-juegos/1lara.jpg', thumb: 'assets/carousel-juegos/1lara.jpg' }),
-        // new ImageItem({ src: 'assets/carousel-juegos/2lara.jpg', thumb: 'assets/carousel-juegos/2lara.jpg' }),
-        // new ImageItem({ src: 'assets/carousel-juegos/3lara.jpg', thumb: 'assets/carousel-juegos/3lara.jpg' }),
-        // new ImageItem({ src: 'assets/carousel-juegos/4lara.jpg', thumb: 'assets/carousel-juegos/4lara.jpg' }),
-        // new ImageItem({ src: 'assets/carousel-juegos/5lara.jpg', thumb: 'assets/carousel-juegos/5lara.jpg' }),
-        // new ImageItem({ src: 'assets/carousel-juegos/6lara.jpg', thumb: 'assets/carousel-juegos/6lara.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/1img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/1img.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/2img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/2img.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/3img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/3img.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/4img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/4img.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/5img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/5img.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/6img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/6img.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/7img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/7img.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/8img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/8img.jpg' }),
+
+    //   if(prod_ID == 1){
+    //     this.elementos = [
+    //     new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/1img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/1img.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/2img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/2img.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/3img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/3img.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/4img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/4img.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/5img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/5img.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/6img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/6img.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/7img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/7img.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/EA_SPORTS/8img.jpg', thumb: 'assets/carousel-juegos/EA_SPORTS/8img.jpg' }),
         
-      ];
-    }
-    if(prod_ID == 2){
-        this.elementos = [
+    //   ];
+    // }
+    // if(prod_ID == 2){
+    //     this.elementos = [
         
 
-        new ImageItem({ src: 'assets/carousel-juegos/1r.jpg', thumb: 'assets/carousel-juegos/1r.jpg' }),
-      ];
-    }
+    //     new ImageItem({ src: 'assets/carousel-juegos/1r.jpg', thumb: 'assets/carousel-juegos/1r.jpg' }),
+    //   ];
+    // }
 
-    if(prod_ID == 3){
-      this.elementos = [
-      // new ImageItem({ src: 'assets/carousel-juegos/1r.jpg', thumb: 'assets/carousel-juegos/1r.jpg' }),
-      new ImageItem({ src: 'assets/carousel-juegos/gtav.jpg', thumb: 'assets/carousel-juegos/gtav.jpg' })
-      ];
-    }
-    if(prod_ID == 4){
-      this.elementos = [
-      new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/1hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/1hl.jpg' }),
-      new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/2hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/2hl.jpg' }),
-      new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/3hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/3hl.jpg' }),
-      new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/4hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/4hl.jpg' }),
-      new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/5hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/5hl.jpg' }),
-      new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/6hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/6hl.jpg' }),
+    // if(prod_ID == 3){
+    //   this.elementos = [
+    //   // new ImageItem({ src: 'assets/carousel-juegos/1r.jpg', thumb: 'assets/carousel-juegos/1r.jpg' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/gtav.jpg', thumb: 'assets/carousel-juegos/gtav.jpg' })
+    //   ];
+    // }
+    // if(prod_ID == 4){
+    //   this.elementos = [
+    //   new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/1hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/1hl.jpg' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/2hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/2hl.jpg' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/3hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/3hl.jpg' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/4hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/4hl.jpg' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/5hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/5hl.jpg' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/HOWARTS/6hl.jpg', thumb: 'assets/carousel-juegos/HOWARTS/6hl.jpg' }),
       
-      ];
-    }
-    if(prod_ID == 5){
-      this.elementos = [
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/1ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/1ac.png' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/2ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/2ac.png' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/3ac.jpg', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/3ac.jpg' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/4ac.jpg', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/4ac.jpg' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/5ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/5ac.png' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/6ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/6ac.png' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/7ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/7ac.png' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/8ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/8ac.png' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/9ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/9ac.png' }),
-      new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/10ac.jpg', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/10ac.jpg' }),
-      ];
-    }
-    if(prod_ID == 6){
-      this.elementos = [
-      new ImageItem({ src: 'assets/carousel-juegos/1dbd.jpg', thumb: 'assets/carousel-juegos/1dbd.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/2dbd.jpg', thumb: 'assets/carousel-juegos/2dbd.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/3dbd.jpg', thumb: 'assets/carousel-juegos/3dbd.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/4dbd.jpg', thumb: 'assets/carousel-juegos/4dbd.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/5dbd.jpg', thumb: 'assets/carousel-juegos/5dbd.jpg' }),
-        new ImageItem({ src: 'assets/carousel-juegos/6dbd.jpg', thumb: 'assets/carousel-juegos/6dbd.jpg' }),
-      ];
-    }
+    //   ];
+    // }
+    // if(prod_ID == 5){
+    //   this.elementos = [
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/1ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/1ac.png' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/2ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/2ac.png' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/3ac.jpg', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/3ac.jpg' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/4ac.jpg', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/4ac.jpg' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/5ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/5ac.png' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/6ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/6ac.png' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/7ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/7ac.png' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/8ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/8ac.png' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/9ac.png', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/9ac.png' }),
+    //   new ImageItem({ src: 'assets/carousel-juegos/ASSASSINS_CREED/10ac.jpg', thumb: 'assets/carousel-juegos/ASSASSINS_CREED/10ac.jpg' }),
+    //   ];
+    // }
+    // if(prod_ID == 6){
+    //   this.elementos = [
+    //   new ImageItem({ src: 'assets/carousel-juegos/BEHAVIOR/1dbd.jpg', thumb: 'assets/carousel-juegos/BEHAVIOR/1dbd.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/BEHAVIOR/2dbd.jpg', thumb: 'assets/carousel-juegos/BEHAVIOR/2dbd.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/BEHAVIOR/3dbd.jpg', thumb: 'assets/carousel-juegos/BEHAVIOR/3dbd.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/BEHAVIOR/4dbd.jpg', thumb: 'assets/carousel-juegos/BEHAVIOR/4dbd.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/BEHAVIOR/5dbd.jpg', thumb: 'assets/carousel-juegos/BEHAVIOR/5dbd.jpg' }),
+    //     new ImageItem({ src: 'assets/carousel-juegos/BEHAVIOR/6dbd.jpg', thumb: 'assets/carousel-juegos/BEHAVIOR/6dbd.jpg' }),
+    //   ];
+    // }
 
     if(prod_ID == 7){
       this.elementos = [
@@ -229,5 +238,21 @@ export class JuegoCarouselComponent implements OnInit{
 
   }
 
+
+  getGaleriaJuego(id: number):void{
+    this.sv_galeria.getJuego_Galeria(id).subscribe( respo =>{
+      this.api_imagenes = respo
+      // console.log(this.api_imagenes);
+      
+      this.elementos = respo.map( (img) => 
+      new ImageItem({
+        src: `${this.STORAGE_URL}${img.ruta_img}`, // Ajusta la URL según tu configuración
+        // thumb: `http://localhost:8000${img.ruta_img}`
+        thumb: `${this.STORAGE_URL}${img.ruta_img}`
+      }))
+
+      
+    });
+  }
 
 }

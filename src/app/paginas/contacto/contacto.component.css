@@ -237,7 +237,7 @@ textarea {
   
 
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
 
     .banner-container{
         height: 150px;

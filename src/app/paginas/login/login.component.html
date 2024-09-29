@@ -2,7 +2,7 @@
   <div class="c-completo">
     <div class="c-medios">
 
-      <form [formGroup]="loginForm" class="cont-hijo" id="formulario" (ngSubmit)="verificarDatos()">
+      <form [formGroup]="loginForm" class="cont-hijo" id="formulario" (ngSubmit)="login()">
         <div class="marca">
           <img src="./../../../assets/Logo0.png" alt="">
           <h1>GhostGames</h1>
@@ -15,13 +15,13 @@
         </div> -->
         <div class="cont-nieto">
           <label for="">Correo</label>
-          <input formControlName="i_correo" type="email" placeholder="Correo" name="correo" id="correo">
+          <input formControlName="correo" type="email" placeholder="Correo" name="correo" id="correo">
           <br>
 
         </div>
         <div class="cont-nieto">
           <label for="">Contraseña</label>
-          <input formControlName="i_password" [type]="mostrarPassword ? 'text' : 'password' " type="password" placeholder="Contraseña1" name="contraseña1" id="contraseña1">
+          <input formControlName="password" [type]="mostrarPassword ? 'text' : 'password' " type="password" placeholder="Contraseña1" name="contraseña1" id="contraseña1">
           <br>
           <div style="display: flex; width: 100%; align-items: center;">
             <button id="btnVerPassword" type="button" (click)="verPassword()">

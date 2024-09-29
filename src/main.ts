@@ -9,6 +9,7 @@ import {provideProtractorTestingSupport} from '@angular/platform-browser';
 import { GALLERY_CONFIG, GalleryConfig } from 'ng-gallery';
 
 import{LIGHTBOX_CONFIG, LightboxConfig} from 'ng-gallery/lightbox';
+import { provideHttpClient } from '@angular/common/http';
 
 
 bootstrapApplication(AppComponent,
@@ -16,6 +17,7 @@ bootstrapApplication(AppComponent,
     providers: [
       provideProtractorTestingSupport(),
       provideRouter(routeConfig),
+      provideHttpClient(), // Agrega esto para proporcionar HttpClient --- se agregó ya cuando se implementó la api
       {
         provide: GALLERY_CONFIG,
         useValue: {

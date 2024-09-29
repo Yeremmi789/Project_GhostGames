@@ -1,60 +1,4 @@
 
-
-<!-- <div class="c-full">
-  <div class="c-medium-carrusel">
-    <div class="c-titulo-productos">
-      <div style="display: flex; justify-content: space-between;">
-        <div>
-          <a class="link_t_productoV1" style="letter-spacing: 1px; display: inline;">{{destacadosTitulo}}</a>
-          <i class="bi bi-chevron-right"></i>
-        </div>
-        <div>
-          <button (click)="prev()" type="button" class="btn-flechas">
-            <i class="bi bi-chevron-compact-left icon-flecha-producto"></i>
-          </button>
-          <button (click)="next()" type="button" class="btn-flechas">
-            <i  class="bi bi-chevron-compact-right icon-flecha-producto"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="carousel-wrapper">
-
-      <div *ngIf="selectedProduct" class="click-message">
-        Haz clic para ver detalles
-      </div>
-
-      <div class="carousel" [style.transform]="'translateX(' + translateX + 'px)'">
-        <a  (click)="detalle_Producto(product.id)" class="c-product" *ngFor="let product of products" (mouseenter)="onMouseEnter(product)" (mouseleave)="onMouseLeave()">
-          <a href="" style="z-index: 20;">Añadir</a>
-          <div class="c-p-img" [ngClass]="{ 'hovered': product === hoveredProduct }">
-            <div class="div-img">
-              <img [src]="product.image" [alt]="product.name" />
-            </div>
-
-          </div>
-          <div class="info">
-            <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product.category }}</p>
-            <p style="font-size: 14px;">{{ product.name }}</p>
-            <div class="precios">
-              <div class="c-descuento">
-                <p style="background-color: #0075e5; font-size: 10px; padding: 6px; border-radius: 4px; font-weight: 700;">{{ product.discount }}</p>
-              </div>
-              <div class="c-cantidad">
-                <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ product.originalPrice }} MXN</p>
-                <p>{{ product.discountedPrice }} MXN</p>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</div> -->
-
-
 <div class="c-full">
   <div class="c-medium-carrusel">
     <div class="c-titulo-productos">
@@ -81,32 +25,27 @@
       </div>
 
       <div class="carousel" [style.transform]="'translateX('+ -paginaIndex * 100 + '%)'">
-        <button  (click)="detalle_Producto(product.id)"  class="carrusel-juego" *ngFor="let product of products" (mouseenter)="onMouseEnter(product)" (mouseleave)="onMouseLeave()">
+        <button  (click)="detalle_Producto(product.id)"  class="carrusel-juego" *ngFor="let product of api_juegos" (mouseenter)="onMouseEnter(product)" (mouseleave)="onMouseLeave()">
           <button *ngIf="usuario_autenticado" (click)="idProducto(product.id); $event.stopPropagation();" id="btn-agragar" style="z-index: 20;">
-            <!-- <i [ngClass]="iconoBoleano ? 'fa-solid fa-minus' : 'fa-solid fa-plus'"  id="color-icono"></i> -->
             <i [ngClass]="product.carrito ? 'fi fi-sr-minus-circle' : 'fi fi-sr-add'"  id="color-icono"></i>
-            <!-- <i [ngClass]="product.carrito ? 'fa-solid fa-plus' : 'fa-solid fa-minus'"  id="color-icono"></i> -->
           </button>
-          
-          <!-- <button (click)="modificarProducto(product.id, 1); $event.stopPropagation();" id="btn-agragar2" style="z-index: 15;">
-            <i [ngClass]="iconoBoleano ? 'fa-solid fa-minus' : 'fa-solid fa-plus'"  id="color-icono2"></i>
-          </button> -->
+
           <div class="c-p-img" [ngClass]="{ 'hovered': product === hoveredProduct }">
             <div class="div-img">
-              <img class="img-juego-carrusel" [src]="product.image" [alt]="product.name" />
+              <img class="img-juego-carrusel" [src]="product.portada" [alt]="product.titulo" />
             </div>
 
           </div>
           <div class="info" style=" width: 100%;">
-            <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product.category }}</p>
-            <p style="font-size: 14px;">{{ product.name }}</p>
+            <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product.versionJuego }}</p>
+            <p style="font-size: 14px;">{{ product.titulo }}</p>
             <div class="precios">
               <div class="c-descuento">
-                <p class="p-descuento" >{{ product.discount }}</p>
+                <p class="p-descuento" >{{ product.descuento }} %</p>
               </div>
               <div class="c-cantidad">
-                <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ product.originalPrice }} MXN</p>
-                <p>{{ product.discountedPrice }} MXN</p>
+                <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ product.precio}} MXN</p>
+                <p>{{ product.precioDescontado }} MXN</p>
               </div>
             </div>
           </div>
@@ -118,62 +57,12 @@
 </div>
 
 
-<!-- <div class="c-full">
-  <div class="c-medium-carrusel">
-    <div class="c-titulo-productos">
-      <div class="encabezado-carrusel">
-        <div>
-          <a class="link_t_productoV1" style="letter-spacing: 0.5px; font-weight: 300; display: inline;">{{destacadosTitulo2}}</a>
-          <i class="bi bi-chevron-right"></i>
-        </div>
-        <div>
-          <button (click)="prev_v2()" type="button" class="btn-flechas">
-            <i class="bi bi-chevron-compact-left icon-flecha-producto"></i>
-          </button>
-          <button (click)="next_v2()" type="button" class="btn-flechas">
-            <i  class="bi bi-chevron-compact-right icon-flecha-producto"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="carousel-wrapper">
-
-
-      <div class="carousel" [style.transform]="'translateX(' + translateX_v2 + 'px)'">
-        <div class="c-product" *ngFor="let product_v2 of products_v2">
-          <div class="c-p-img">
-            <img [src]="product_v2.image" [alt]="product_v2.name"/>
-          </div>
-          <div class="info">
-            <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product_v2.category }}</p>
-            <p style="font-size: 14px;">{{ product_v2.name }}</p>
-            <div class="precios">
-              <div class="c-descuento">
-                <p style="background-color: #0075e5; font-size: 10px; padding: 6px; border-radius: 4px; font-weight: 700;">{{ product_v2.discount }}</p>
-              </div>
-              <div class="c-cantidad">
-                <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ product_v2.originalPrice }} MXN</p>
-                <p>{{ product_v2.discountedPrice }} MXN</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-
-    </div>
-  </div>
-</div> -->
-
-
 <div class="c-full">
   <div class="c-medium-carrusel">
     <div class="c-titulo-productos">
       <div class="encabezado-carrusel">
         <div class="div-encabezado-carrusel">
-          <a class="link_t_productoV1" style="letter-spacing: 1px; display: inline;">{{destacadosTitulo}}</a>
+          <a class="link_t_productoV1" style="letter-spacing: 1px; display: inline;">{{destacadosTitulo2}}</a>
           <i class="bi bi-chevron-right"></i>
         </div>
         <div class="div-flechas-carrusel">
@@ -194,28 +83,26 @@
       </div>
 
       <div class="carousel" [style.transform]="'translateX('+ -paginaIndex2 * 100 + '%)'">
-        <button  (click)="detalle_Producto(product_v2.id)" class="carrusel-juego" *ngFor="let product_v2 of products_v2" (mouseenter)="onMouseEnter(product_v2)" (mouseleave)="onMouseLeave()">
+        <button  (click)="detalle_Producto(product_v2.id)" class="carrusel-juego" *ngFor="let product_v2 of api_juegosNormales" (mouseenter)="onMouseEnter(product_v2)" (mouseleave)="onMouseLeave()">
           <button *ngIf="usuario_autenticado" (click)="idProducto(product_v2.id); $event.stopPropagation();" id="btn-agragar" style="z-index: 20;">
-            <!-- <i [ngClass]="iconoBoleano ? 'fa-solid fa-minus' : 'fa-solid fa-plus'"  id="color-icono"></i> -->
             <i [ngClass]="product_v2.carrito ? 'fi fi-sr-minus-circle' : 'fi fi-sr-add'"  id="color-icono"></i>
           </button>
           <div class="c-p-img" [ngClass]="{ 'hovered': product_v2 === hoveredProduct }">
             <div class="div-img">
-              <img class="img-juego-carrusel" [src]="product_v2.image" [alt]="product_v2.name" />
+              <img class="img-juego-carrusel" [src]="product_v2.portada" [alt]="product_v2.titulo" />
             </div>
 
           </div>
           <div class="info" style=" width: 100%;">
-            <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product_v2.category }}</p>
-            <p style="font-size: 14px;">{{ product_v2.name }}</p>
+            <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product_v2.versionJuego }}</p>
+            <p style="font-size: 14px;">{{ product_v2.titulo }}</p>
             <div class="precios">
               <div class="c-descuento">
-                <p class="p-descuento" >{{ product_v2.discount }}</p>
-
+                <!-- <p class="p-descuento" >{{ product_v2.descuento }}</p> -->
               </div>
               <div class="c-cantidad">
-                <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ product_v2.originalPrice }} MXN</p>
-                <p>{{ product_v2.discountedPrice }} MXN</p>
+                <!-- <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ product_v2.precio }} MXN</p> -->
+                <p style="padding-bottom:15px;">{{ product_v2.precio }} MXN</p>
               </div>
             </div>
           </div>
@@ -227,56 +114,3 @@
 </div>
 
 
-
-
-
-
-<!-- Carousel antes de los  ID -->
-
-<!-- <div class="c-full">
-  <div class="c-medium-carrusel">
-    <div class="c-titulo-productos">
-      <div class="encabezado-carrusel">
-        <div>
-          <a href="" class="link_t_productoV1" style="letter-spacing: 1px; display: inline;">Destacados de las SUPEROFERTAS</a>
-          <i class="bi bi-chevron-right"></i>
-        </div>
-        <div>
-          <button (click)="prev()" type="button" class="btn-flechas">
-            <i class="bi bi-chevron-compact-left icon-flecha-producto"></i>
-          </button>
-          <button (click)="next()" type="button" class="btn-flechas">
-            <i  class="bi bi-chevron-compact-right icon-flecha-producto"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="carousel-wrapper">
-
-      <div class="carousel" [style.transform]="'translateX(' + translateX + 'px)'">
-        <a href="" class="c-product" *ngFor="let product of products">
-          <div class="c-p-img">
-            <div class="div-img">
-              <img [src]="product.image" [alt]="product.name" />
-            </div>
-          </div>
-          <div class="info">
-            <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product.category }}</p>
-            <p style="font-size: 14px;">{{ product.name }}</p>
-            <div class="precios">
-              <div class="c-descuento">
-                <p style="background-color: #0075e5; font-size: 10px; padding: 6px; border-radius: 4px; font-weight: 700;">{{ product.discount }}</p>
-              </div>
-              <div class="c-cantidad">
-                <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ product.originalPrice }} MXN</p>
-                <p>{{ product.discountedPrice }} MXN</p>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-    </div>
-  </div>
-</div> -->

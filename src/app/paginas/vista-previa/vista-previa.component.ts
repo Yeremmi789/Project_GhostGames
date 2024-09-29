@@ -4,6 +4,8 @@ import { LibreriasComponent } from '../librerias/librerias.component';
 import { JuegoCarouselComponent } from '../../reutilizables/juego-carousel/juego-carousel.component';
 import { ActivatedRoute, Router, RouterLink, RouterOutlet } from '@angular/router';
 import { BuscadorService } from '../../servicios/dinamicos/buscador.service';
+import { JuegosService } from 'src/app/servicios/juegos.service';
+import { NgIf } from '@angular/common';
 
 
 @Component({
@@ -15,6 +17,7 @@ import { BuscadorService } from '../../servicios/dinamicos/buscador.service';
     JuegoCarouselComponent,
     RouterOutlet,
     RouterLink,
+    NgIf,
   ],
   templateUrl: './vista-previa.component.html',
   styleUrl: './vista-previa.component.css'
@@ -27,6 +30,9 @@ export class VistaPreviaComponent implements OnInit{
     private el:ElementRef,
     private renderer2:Renderer2,
     private colorService: BuscadorService,
+
+    // API JUEGO
+    private sv_juego:JuegosService,
   ){
 
   }
@@ -37,19 +43,16 @@ export class VistaPreviaComponent implements OnInit{
 
   clase_cFull = "c-full";
 
+  // API VARIABLES
+  api_juegoInfo:any;
+  // api_galeriaJuegos:any;
+  usuarioId: number = 0;
+
 
   ngOnInit(): void {
     this.rou.params.subscribe( (parametro) => {
       const prod_ID = +parametro['id'];
-      this.productoSeleccionado = this.obtenerProductoPorId(prod_ID);
-
-      if(this.productoSeleccionado){
-        // this.el.nativeElement.backgroundColor = this.productoSeleccionado.colorFondo;
-        this.colorFondos = this.productoSeleccionado.colorFondo;
-        this.colorService.changeColor(this.colorFondos); // Cambia el color en el servicio
-
-      }
-
+      this.getJuego(prod_ID);
     });
 
   }
@@ -78,6 +81,35 @@ agregarElemento(textoElemento: string) {
     const productoMan = this.products.find((man) => man.id === id);
     return productoMan;
   }
+
+
+  getJuego(id:number){
+    this.sv_juego.getJuego_completo(id).subscribe( resp =>{
+      this.api_juegoInfo = resp
+      
+      // this.api_juegoInfo = resp[0]; //para cuando la api devuelva [ { ... } ]
+      console.log(this.api_juegoInfo)
+      if(this.api_juegoInfo){
+        this.colorFondos = this.api_juegoInfo.colorFondo;
+        this.colorService.changeColor(this.colorFondos); // Cambia el color en el servicio
+      }
+    });
+  }
+
+
+  // getJuego(id: number): void {
+  //   this.sv_juego.getJuego_completo(id).subscribe(
+  //     juego => {
+  //       this.api_juegoInfo = juego; // Asignamos el juego completo
+  //       // La galería la obtenemos directamente del backend
+  //       this.api_galeriaJuegos = juego.galeria || []; // Aquí necesitas manejar la galería si la obtienes en otra parte
+  //       console.log(this.api_juegoInfo, this.api_galeriaJuegos); // Ver los datos en la consola
+  //     },
+  //     error => {
+  //       console.error('Error obteniendo el juego completo:', error);
+  //     }
+  //   );
+  // }
 
 
   products = [

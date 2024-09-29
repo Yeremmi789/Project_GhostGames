@@ -736,7 +736,7 @@ margin: 30px 20px;
 
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1000px) {
   .banner-container {
     height: 600px; /* Reduce la altura en pantallas medianas */
     width: 100%;
@@ -744,7 +744,7 @@ margin: 30px 20px;
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 900px) {
   .banner-container {
     height: 400px; /* Reduce la altura en pantallas pequeñas */
     height: 100vh; /* Altura de la ventana visible */
