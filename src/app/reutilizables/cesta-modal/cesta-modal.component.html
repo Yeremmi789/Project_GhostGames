@@ -8,7 +8,7 @@
     <i id="iconos_cesta" [ngClass]="cestaVacia ? 'fi fi-sr-shopping-cart-add' : 'noseComoPeroFunciona' "></i>
     <div id="cesta-Pedidos-container">
 
-      <ul id="cont-juego" *ngFor="let itemCesta of dataCesta">
+      <ul id="cont-juego" *ngFor="let itemCesta of dataCestaAPI">
         <!-- <li >
           Titulo: {{itemCesta.juego}},<br>
           Costo: ${{itemCesta.costo}},<br>
@@ -20,20 +20,20 @@
 
         <div class="c-p-img">
           <div class="div-img">
-            <img class="img-juego-carrusel" [src]="itemCesta.imagen" [alt]="itemCesta.juego" />
+            <img class="img-juego-carrusel" [src]="itemCesta.juego.portada" [alt]="itemCesta.juego.titulo" />
           </div>
 
         </div>
         <div class="info" style=" width: 100%;">
           <!-- <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product.category }}</p> -->
-          <p style="font-size: 14px;">{{ itemCesta.juego }}</p>
+          <p style="font-size: 14px;">{{ itemCesta.juego.titulo }}</p>
           <div class="precios">
             <div class="c-descuento">
-              <p class="p-descuento" >{{ itemCesta.loMenos }} %</p>
+              <p class="p-descuento" >{{ itemCesta.juego.descuento }} %</p>
             </div>
             <div class="c-cantidad">
-              <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ itemCesta.costo }} MXN</p>
-              <p>{{ itemCesta.costo }} MXN</p>
+              <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{ itemCesta.juego.precioDescontado }} MXN</p>
+              <p>{{ itemCesta.juego.precio }} MXN</p>
             </div>
           </div>
         </div>

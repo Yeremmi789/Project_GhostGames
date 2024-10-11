@@ -8,6 +8,7 @@ import { BuscadorService } from '../../servicios/dinamicos/buscador.service';
 import { HeaderService } from '../../servicios/dinamicos/header.service';
 import { AutenticacionService } from '../../servicios/autenticacion.service';
 import { JuegosService } from 'src/app/servicios/juegos.service';
+import { CestaService } from 'src/app/servicios/cesta.service';
 
 
 @Component({
@@ -34,15 +35,35 @@ export class ProductoCarouselComponent implements OnInit {
   cantidadDecimal: number = 0;
   cantidadDecimal2: number = 0;
 
-  usuario_autenticado:boolean = false;
   
   // API Y SERVICIOS #2
   api_juegos:any;
   api_juegosNormales:any;
   api_juegoInfo:any;
+  
+  userRoles: string[] = [];
+  usuario_autenticado:boolean = false;
 
+  cesta:any[] = [];
+  total:number = 0;
+  usuarioObtenido:number = 0;
+  
+  //VARIABLES ROLES
+  user: any; // Cambia a la interfaz que definas para el usuario
 
+  constructor(
+    private router: Router,
+    private localStorage: LocalstorageBasicService,
+    
+    private buscadorService:BuscadorService, //Para cambiar color dinamico y cesta de compras
+    private headerService:HeaderService,
+    private autenticacionService:AutenticacionService,
+    private localstorageService:LocalstorageBasicService,
+    // servicios API #2
+    private sv_juegos: JuegosService,
+    private sv_cesta: CestaService,
 
+  ) {}
 
   // #1
   // Listener para detectar cambios en el tamaño de la ventana
@@ -93,20 +114,7 @@ export class ProductoCarouselComponent implements OnInit {
 
 
 
-  constructor(
-    private router: Router,
-    private localStorage: LocalstorageBasicService,
-    
-    private buscadorService:BuscadorService, //Para cambiar color dinamico y cesta de compras
-    private headerService:HeaderService,
-    private autenticacionService:AutenticacionService,
-    private localstorageService:LocalstorageBasicService,
-
-    // servicios API #2
-    private sv_juegos: JuegosService,
-
-  ) {
-  }
+  
 
   infoLocalStorage = this.localstorageService.consultarUsuario("informacion formulario");
 
@@ -123,23 +131,17 @@ export class ProductoCarouselComponent implements OnInit {
       this.api_juegosNormales = res2;
       this.checkDeviceType();
     });
-    
-    // this.autenticacionService.var_logeado$.subscribe( respuestaServicio =>{
-    //   this.usuario_autenticado = respuestaServicio;
-    // });
-
-    // this.usuario_autenticado = this.infoLocalStorage.usuario_logueado;
 
 
+  }
+  // Método que verifica si el usuario tiene un rol
+  isUserRole(role: string[]): boolean {
+    return this.autenticacionService.hasRole(role);
   }
 
   hoveredProduct: any; // Propiedad para almacenar el producto sobre el cual está el mouse
   selectedProduct: any; // Propiedad para almacenar el producto seleccionado
 
-  
-    // Funcion para cambiar el color del buscador
-    
-    // Funcion para cambiar el color del buscador
 
   onMouseEnter(product: any) {
     this.hoveredProduct = product;
@@ -406,7 +408,7 @@ export class ProductoCarouselComponent implements OnInit {
   }
   
 
-  idProducto(id: number):void {
+  idProducto(juego_id: number):void {
     // en el HTML aparece esto:  $event.stopPropagation(); eso es para que no deje que se active alguna otra acción fuera del boton cuando doy clic en el boton
 
     // let producto = this.api_juegos.find((item) => item.id === id);
@@ -442,6 +444,50 @@ export class ProductoCarouselComponent implements OnInit {
 
 
     // }
+
+
+    // this.sv_cesta.agregarCesta(juego_id).subscribe( resp => {
+
+    // });
+
+    const infoLocalStorage = this.localstorageService.obtenerItem('user');
+      const userId = infoLocalStorage.id;
+      this.usuarioObtenido = userId;
+      alert(this.usuarioObtenido);
+
+    this.sv_cesta.verMiCesta(this.usuarioObtenido).subscribe( respi => {
+      alert("SE ACTIVO EL ver mi Cestaaaa");
+      // console.log(respi.juego.titulo);
+
+      // this.cesta = respi['info de la cesta'];
+      // this.total =  respi['Total'];
+      
+    //   let nuevo = {
+    //     juego: productoAgregado.name, //juego: producto.name,
+    //     costo: parseFloat(productoAgregado.originalPrice), //parseFloat(producto.originalPrice),
+    //     loMenos: parseFloat(productoAgregado.discount.replace('%', '')),  //parseFloat(producto.discount.replace('%', '')) // Convertir el descuento si es necesario
+    //     idJuego: productoAgregado.id,
+    //     imagen:productoAgregado.image
+    //   };
+    // titul0:string, preci0:number, descuent0:number, idJueg0:number, precioDescontad0:number, imagen:string
+
+
+      // let nuevo = {
+      //   titul0: respi.juego.titulo, //juego: producto.name,
+      //   preci0: parseFloat(respi.juego), //parseFloat(producto.originalPrice),
+      //   descuent0: parseFloat(respi.juego.descuento.replace('%', '')),  //parseFloat(producto.discount.replace('%', '')) // Convertir el descuento si es necesario
+      //   idJueg0: respi.juego.id,
+      //   precioDescontad0: respi.juego.precioDescontado,
+      //   imagen: respi.image
+      // };
+
+      // this.agregarJuego(nuevo);
+
+
+    });
+
+    // AQUI PONER LA FUNCION DONDE VAMOS A COLOCAR EL ID, en lugar del cesta.ts
+    // porque de aqui se va a compatir a headerSErvice y se actualice dinámicamente :D
   }
 
   arregloCarrito: Array<
@@ -455,15 +501,34 @@ export class ProductoCarouselComponent implements OnInit {
     }
   > = [];
 
-  agregarJuego(producto:{juego:string, costo:number, loMenos:number, idJuego:number,imagen:string}):void {
-    this.arregloCarrito.push(producto);
+
+  arregloCarritoAPI: Array<
+    {
+      // los campos que estan aquí. van hacer los campos de la bd de carrito de compras
+      titul0: string,
+      preci0: number,
+      descuent0: number,
+      idJueg0: number;
+      precioDescontad0:number,
+      imagen:string,
+    }
+  > = [];
+
+  agregarJuego(producto:{titul0:string, preci0:number, descuent0:number, idJueg0:number, precioDescontad0:number,imagen:string}):void {
+    // this.arregloCarrito.push(producto);
+    this.arregloCarritoAPI.push(producto);
     // console.log("Se agregó: ", this.arregloCarrito)
     let totalCost = this.sumarJuegos();
     // console.log("El costo total es: ", totalCost);
 
   
     // this.buscadorService.actualizarCesta(producto);
-    this.headerService.agregarCesta(producto);
+    // this.headerService.agregarCesta(producto);
+    this.headerService.agregarCestaAPI(producto);
+
+    
+
+    
     
   }
 

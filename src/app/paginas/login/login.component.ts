@@ -57,10 +57,24 @@ export class LoginComponent {
     }else{
       const {correo,password} = this.loginForm.value;
       this.autenticacionService.login(correo, password).subscribe(res => {
-        console.log('Login exitoso');
-        this.router.navigateByUrl('/');
+        // console.log('Respuesta del servidor:', res); // Agrega esta línea
+      
+        if (res.Usuario) { // Asegúrate de que 'Usuario' esté definido
+          const emailUsuario = res.Usuario.email;
+          // console.log('Email del usuario:', emailUsuario);
+        } else {
+          console.error('La propiedad Usuario no está definida en la respuesta.');
+        }
+      
+        const token = res.token;
+        // console.log('Token de autenticación:', token);
+        // console.log(res);
         console.log(res);
+      
+      
+        this.router.navigateByUrl('/');
       });
+      
     }
   }
 

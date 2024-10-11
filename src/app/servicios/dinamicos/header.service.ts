@@ -10,6 +10,15 @@ export class HeaderService {
 
   private cesta = new BehaviorSubject<Array <{juego:string, costo:number, loMenos:number, idJuego:number, imagen:string}> >([]);
   cestaVariable$ = this.cesta.asObservable();
+  
+  private cestaAPI = new BehaviorSubject<Array <{titul0:string, preci0:number, descuent0:number, idJueg0:number, precioDescontad0:number, imagen:string}> >([]);
+  cestaVariableAPI$ = this.cestaAPI.asObservable();
+
+  agregarCestaAPI(producto:{titul0:string, preci0:number, descuent0:number, idJueg0:number, precioDescontad0:number, imagen:string}): void {
+    let informacionCesta = this.cestaAPI.getValue();
+    informacionCesta.push(producto);
+    this.cestaAPI.next(informacionCesta);
+  }
 
   agregarCesta(producto:{juego:string, costo:number, loMenos:number, idJuego:number, imagen:string}): void {
     let informacionCesta = this.cesta.getValue();

@@ -27,18 +27,18 @@
     
     <li><a class="link-blanco l_size1" routerLink="/inicio">Inicio</a></li>
     <li><a class="link-blanco l_size1" href="/productos">Productos</a></li>
-    <li><a class="link-blanco l_size1" href="">Galería</a></li>
-    <li><a class="link-blanco l_size1" href="">Soporte</a></li>
+    <li *ngIf="isUserRole(['cliente'])"><a class="link-blanco l_size1" href="">Galería</a></li>
+    <li *ngIf="isUserRole(['usuario'])"><a class="link-blanco l_size1" href="">Soporte</a></li>
     <li><a class="link-blanco l_size1" href="/contacto">Contacto</a></li>
 
 
-    <li *ngIf="!logeado"><a class="link-blanco l_size1" href="/registro">Registro</a></li>
-    <li *ngIf="!logeado"><a class="link-blanco l_size1" href="/login">Iniciar Sesión</a></li>
-    <li *ngIf="logeado" (click)="salirUsuario()"><a class="link-blanco l_size1" href="/">Salir</a></li>
+    <li *ngIf="!isUserRole(['admin','usuario','cliente','soporte','moderador','gestor de inventario','verificador de contenido'])"><a class="link-blanco l_size1" href="/registro">Registro</a></li>
+    <li *ngIf="!isUserRole(['admin','usuario','cliente','soporte','moderador','gestor de inventario','verificador de contenido'])"><a class="link-blanco l_size1" href="/login">Iniciar Sesión</a></li>
+    <li *ngIf="isUserRole(['admin','usuario','cliente','soporte','moderador','gestor de inventario','verificador de contenido'])" (click)="salirUsuario()"><a class="link-blanco l_size1" href="/">Salir</a></li>
 
   </ul>
   <!-- Mostrar este icono cuando se tengan las sesiones -->
-  <div *ngIf="logeado" class="cont-user">
+  <div *ngIf="isUserRole(['usuario'])" class="cont-user">
     <button (click)="alerta()" id="btn-user" ><i id="icon-user" class="fi fi-sr-user"></i></button>
      <span>|| </span>
     <button id="btn-icon" class="link-blanco" (click)="showModal()">
@@ -48,6 +48,7 @@
   </div>
 </nav>
 
+<!-- <app-cesta-modal [isVisible]="isVisible" (onClose)="handleClose()"> -->
 <app-cesta-modal [isVisible]="isVisible" (onClose)="handleClose()">
   <!-- <h2>{{ modalTitle }}</h2> -->
   <!-- <p>{{ modalContent }}</p> -->

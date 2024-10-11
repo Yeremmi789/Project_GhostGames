@@ -57,6 +57,12 @@ export class AppComponent implements OnInit{
   logeado:boolean = false;
   
 
+  //VARIABLES APIS
+  userRoles: string[] = [];
+  
+  //VARIABLES ROLES
+  user: any; // Cambia a la interfaz que definas para el usuario
+
   alerta(){
     alert("BOTON DE USUARIO");
   }
@@ -87,7 +93,8 @@ export class AppComponent implements OnInit{
     private headerService:HeaderService,
     private localStorage:LocalstorageBasicService,
     private autenticacionService:AutenticacionService,
-    private localstorageService:LocalstorageBasicService
+    private localstorageService:LocalstorageBasicService,
+    private router:Router
   ){  
 
     this.renderer.listen('window', 'click',(e:Event)=>{
@@ -126,8 +133,6 @@ export class AppComponent implements OnInit{
   @ViewChild(GalleryComponent) gallery!: GalleryComponent;
 
   items: ImageItem[] = [];
-  
-  
 
   ngOnInit() {
 
@@ -142,17 +147,36 @@ export class AppComponent implements OnInit{
       });
     });
 
-    // this.items = [
-    //   new ImageItem({ src: 'assets/carousel/c1-1.jpeg', thumb: 'assets/carousel/c1-1.jpeg' }),
-    //   new ImageItem({ src: 'assets/carousel/c1-2.jpg', thumb: 'assets/carousel/c1-2.jpg' }),
-    //   new ImageItem({ src: 'assets/carousel/c1-3.jpg', thumb: 'assets/carousel/c1-3.jpg' }),
-    // ];
-
+    // this.checkLocalStorage();
     
+    const userFromStorage = localStorage.getItem('user');
+    if (userFromStorage) {
+      const user = JSON.parse(userFromStorage);
+      this.autenticacionService.userSubject.next(user);  // Restaura el usuario si está guardado en localStorage
+    }
+
       this.localstorageService.var_userLogueado$.subscribe(estado => {
         this.logeado = estado;
       });
     
+  }
+
+  // Método que verifica si el usuario tiene un rol
+  isUserRole(role: string[]): boolean {
+    return this.autenticacionService.hasRole(role);
+  }
+  // PARA UN SOLO ROL
+  // isUserRole(role: string): boolean {
+  //   return this.autenticacionService.hasRole(role);
+  // }
+
+  checkLocalStorage() {
+    if (localStorage.getItem('token')) {
+      this.router.navigateByUrl('/');
+    }
+    else{
+      this.router.navigateByUrl('/login');
+    }
   }
 
   
