@@ -4,9 +4,9 @@
   padding: 0;
 }
 
-html, body {
-  overflow-x: hidden;
-}
+/* html, body {
+  overflow-x: hidden; NO RECUEERDO PARA QUE PUSE ESTO, PERO SI SE PONE, NO SE PODRÁ USAR EL STICKY. y más porque están en todo el proyecto html y css
+} */
 
 .name_sitio{
   font-family: fantasy;
