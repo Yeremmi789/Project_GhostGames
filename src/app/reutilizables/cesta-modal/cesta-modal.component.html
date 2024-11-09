@@ -9,15 +9,6 @@
     <div id="cesta-Pedidos-container">
 
       <ul id="cont-juego" *ngFor="let itemCesta of dataCestaAPI">
-        <!-- <li >
-          Titulo: {{itemCesta.juego}},<br>
-          Costo: ${{itemCesta.costo}},<br>
-          Descuento: {{itemCesta.loMenos}}%,<br>
-        </li>
-        <img id="imagen-cesta" [src]="itemCesta.imagen" alt="producto en la cesta de compras"> -->
-
-
-
         <div class="c-p-img">
           <div class="div-img">
             <img class="img-juego-carrusel" [src]="itemCesta.juego.portada" [alt]="itemCesta.juego.titulo" />
@@ -37,8 +28,6 @@
             </div>
           </div>
         </div>
-
-
 
       </ul>
     </div>

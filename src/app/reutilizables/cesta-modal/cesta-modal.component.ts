@@ -6,6 +6,7 @@ import { CestaService } from 'src/app/servicios/cesta.service';
 import { LocalstorageBasicService } from 'src/app/servicios/localstorage-basic.service';
 import { IF_cesta, IF_cestaResponse } from 'src/app/interfaces/cestaData';
 import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-cesta-modal',
@@ -13,9 +14,11 @@ import { AutenticacionService } from 'src/app/servicios/autenticacion.service';
   imports: [
     NgClass,
     NgFor,
+    // HttpClientModule,
   ],
   templateUrl: './cesta-modal.component.html',
-  styleUrl: './cesta-modal.component.css'
+  styleUrl: './cesta-modal.component.css',
+  providers: [CestaService],
 })
 export class CestaModalComponent {
 
@@ -29,7 +32,6 @@ export class CestaModalComponent {
   cesta:any[] = [];
   total:number = 0;
   usuarioObtenido:number = 0;
-
 
   public dataCestaAPI: IF_cesta[] = []; // Aquí se almacenará la información de la cesta
   public dataCostoTotal: number = 0;    // Aquí se almacenará el costo total
@@ -65,37 +67,17 @@ export class CestaModalComponent {
 
 
   ngOnInit(): void {
-    
-
-    // this.headerServices.cestaVariableAPI$.subscribe( inf =>{
-    //   this.dataCestaAPI = inf;
-    //   if (inf.length == 0){
-    //     this.mostrarCesta();
-    //   }else{
-    //     this.ocultarCesta();
-    //   }
-    // });
 
 
-    // this.sv_autenticacion.id_USUARIO; // obtener el id almacenado del servicio de AUTENTICACIONSERVICE.ts
-    // this.obtenerCesta(1); // Usar el ID del usuario real. Aquí estoy usando 1 como ejemplo
     this.obtenerCesta(this.sv_autenticacion.id_USUARIO);
-
-
-    
-    
+    this.sv_cesta.verMiCesta(this.sv_autenticacion.id_USUARIO);
     // this.checkLocalStorage();
-
-    
-
   }
 
-  // Método para obtener la cesta del usuario
   obtenerCesta(idUser: number): void {
     this.sv_cesta.verMiCesta(idUser).subscribe(
       (response: IF_cestaResponse) => {
-        this.dataCestaAPI = response['Info de la cesta'];  // Almacenar la cesta obtenida
-        this.dataCostoTotal = response.Total;  // Almacenar el total
+        this.dataCestaAPI = response['Info de la cesta'];  
         this.cestaVacia = this.dataCestaAPI.length === 0;  // Verificar si la cesta está vacía
       },
       (error) => {
@@ -106,9 +88,7 @@ export class CestaModalComponent {
   
 
   showModal(){
-    // this.isVisible = true;
     this.isVisible = false;
-
   }
 
   checkLocalStorage() {

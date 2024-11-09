@@ -158,7 +158,7 @@ width: 50%;
 .link_t_productoV1{
   /* list-style: none; */
   text-decoration: none;
-  color: var(---link_titulo);
+  color: var(--link_titulo);
 }
 
 .link_t_productoV1:hover{

@@ -41,7 +41,8 @@
   <div *ngIf="isUserRole(['usuario'])" class="cont-user">
     <button (click)="alerta()" id="btn-user" ><i id="icon-user" class="fi fi-sr-user"></i></button>
      <span>|| </span>
-    <button id="btn-icon" class="link-blanco" (click)="showModal()">
+    <!-- <button id="btn-icon" class="link-blanco" (click)="showModal()"> -->
+    <button id="btn-icon" class="link-blanco" (click)="cestaComponent()">
       <i class="fi fi-sr-shopping-cart cesta-icono" ></i>
       <span id="cesta-cantidad"> {{cantidadCesta}}</span>
     </button>

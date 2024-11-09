@@ -24,3 +24,19 @@ export interface IF_juego {
   }
   
 //   export interface IF_cestaResponse extends Array<IF_cesta> {}
+
+
+export interface IF_revisar{
+  ok: boolean;
+  
+  // Juegos_ID: number; // se coloca porque ya hay una interface que tiene los valores que regresamos en el backend, el cual es solamente el id del juego. mas que nada para no hacer otra interface. Buena suerte a YOO del futuro :)... recuerda eres muy grande, algún día podremos darle una mejor comodidad a nuestros papás :D
+  Juegos_ID: IF_cesta[] // se coloco el segundo, porque como ahora tambien regresa "juego_id" y "id", si solamente regresara uno, se usa el :number
+  
+}
+
+// export interface IF_revisar {
+//   ok: boolean;  // Propiedad adaptada
+//   juegos_id: { juego_id: number }[];  // Refleja la estructura de la respuesta de la API
+// }
+
+

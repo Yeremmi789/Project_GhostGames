@@ -123,13 +123,13 @@ ul{
   background-color: transparent;
   cursor: pointer;
   overflow: hidden; /* Esto hace que las esquinas sean no clicables */
-  background-color: var(---btn-azulCielo);
+  background-color: var(--btn-azulCielo);
   background-color: #06686a;
 }
 
 #icon-user{
   font-size: 25px;
-  color: var(---txt-blanco);
+  color: var(--txt-blanco);
   /* padding: 2px; */
 }
 
@@ -155,19 +155,19 @@ ul{
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(---btn-flechas2);
+  background-color: var(--btn-flechas2);
 }
 
 .cesta-icono{
   font-size: 25px;
-  color: var(---btn-morado);
+  color: var(--btn-morado);
 }
 
 #cesta-cantidad{
   position: absolute;
   font-size: 20px;
-  color: var(---txt-blanco);
-  background-color: var(---btn-morado);
+  color: var(--txt-blanco);
+  background-color: var(--btn-morado);
   border-radius: 50%;
   width: 18px;
   height: 20px;

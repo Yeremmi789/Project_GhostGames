@@ -26,8 +26,8 @@
 
       <div class="carousel" [style.transform]="'translateX('+ -paginaIndex * 100 + '%)'">
         <button  (click)="detalle_Producto(product.id)"  class="carrusel-juego" *ngFor="let product of api_juegos" (mouseenter)="onMouseEnter(product)" (mouseleave)="onMouseLeave()">
-          <button *ngIf="isUserRole(['admin','usuario'])" (click)="idProducto(product.id); $event.stopPropagation();" id="btn-agragar" style="z-index: 20;">
-            <i [ngClass]="product.carrito ? 'fi fi-sr-minus-circle' : 'fi fi-sr-add'"  id="color-icono"></i>
+          <button *ngIf="isUserRole(['admin','usuario'])" (click)="idProducto11(product); $event.stopPropagation();" id="btn-agragar" style="z-index: 20;">
+            <i [ngClass]="product.carritosss ? 'fi fi-sr-minus-circle' : 'fi fi-sr-add'"  id="color-icono"></i>
           </button>
 
           <div class="c-p-img" [ngClass]="{ 'hovered': product === hoveredProduct }">
@@ -84,7 +84,7 @@
 
       <div class="carousel" [style.transform]="'translateX('+ -paginaIndex2 * 100 + '%)'">
         <button  (click)="detalle_Producto(product_v2.id)" class="carrusel-juego" *ngFor="let product_v2 of api_juegosNormales" (mouseenter)="onMouseEnter(product_v2)" (mouseleave)="onMouseLeave()">
-          <button *ngIf="usuario_autenticado" (click)="idProducto(product_v2.id); $event.stopPropagation();" id="btn-agragar" style="z-index: 20;">
+          <button *ngIf="usuario_autenticado" (click)="idProducto(product_v2.id, true, 0); $event.stopPropagation();" id="btn-agragar" style="z-index: 20;">
             <i [ngClass]="product_v2.carrito ? 'fi fi-sr-minus-circle' : 'fi fi-sr-add'"  id="color-icono"></i>
           </button>
           <div class="c-p-img" [ngClass]="{ 'hovered': product_v2 === hoveredProduct }">

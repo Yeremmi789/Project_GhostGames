@@ -19,7 +19,7 @@
     padding: 30px 0;
 }
 .c-titulo p{
-    color: var(---txt-blanco);
+    color: var(--txt-blanco);
     font-size: 46px;
 }
 
@@ -53,7 +53,7 @@
 
 .c-fondo {
     position: absolute;
-    background-color: var(---fondo-negro);
+    background-color: var(--fondo-negro);
     display: flex;
     width: 100%;
     height: 100%;
@@ -104,7 +104,7 @@
 
 .c-fondo p{
     font-size: 20px;
-    color: var(---txt-blanco);
+    color: var(--txt-blanco);
     padding:0 25px;
     line-height: 1.5;
     text-align: center;
@@ -112,7 +112,7 @@
 }
 
 .c-nombre-categoria{
-    background-color: var(---fondo-productos);
+    background-color: var(--fondo-productos);
     display: flex;
     width: 100%;
     z-index: 20;
@@ -132,7 +132,7 @@
 
 .c-nombre-categoria p{
     transition: all 600ms; 
-    color: var(---txt-blanco);
+    color: var(--txt-blanco);
     font-size: 20px;
     font-family: Inter, sans-serif;
 }

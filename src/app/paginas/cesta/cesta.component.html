@@ -1,0 +1,75 @@
+
+<div style="height: 200px; position: sticky; top: 50px;">
+  <div class="h1STICKY">
+      <h1>Holamundodododo</h1>
+  </div>
+  <p>Contenido adicional...</p>
+</div>
+
+
+<div class="modal-container">
+  <div class="modal-contenedor">
+    <div class="div-titulo-cesta">
+      <span class="btn-cerrar">&times;</span>
+      <h1 id="h1-titulo">Mi cesta de productos pendiente :)</h1>
+    </div>
+    <p id="subtitulo-cesta"> {{cestaVacia ? 'No Tienes ningún Producto aquí' : ''}}</p>
+    <i id="iconos_cesta" [ngClass]="cestaVacia ? 'fi fi-sr-shopping-cart-add' : 'noseComoPeroFunciona' "></i>
+    <div id="cesta-Pedidos-container">
+
+      <ul id="cont-juego" *ngFor="let itemCesta of dataCestaAPI">
+        <div class="c-p-img">
+          <div class="div-img">
+            <img class="img-juego-carrusel" [src]="itemCesta.juego.portada" [alt]="itemCesta.juego.titulo" />
+          </div>
+
+        </div>
+        <div class="info" style=" width: 100%;">
+          <!-- <p style=" color: #777677; font-size: 9px; line-height: 15px; font-weight: 800;">{{ product.category }}</p> -->
+          <p style="font-size: 14px;">{{ itemCesta.juego.titulo }}</p>
+          <div class="precios">
+            <div class="c-descuento">
+              <p class="p-descuento">{{ itemCesta.juego.descuento }} %</p>
+            </div>
+            <div class="c-cantidad">
+              <p style=" color: #777677; line-height: 15px; text-decoration: line-through;">{{
+                itemCesta.juego.precioDescontado }} MXN</p>
+              <p>{{ itemCesta.juego.precio }} MXN</p>
+            </div>
+          </div>
+        </div>
+
+      </ul>
+    </div>
+
+    <div id="div-totalCesta">
+      <p id="total-cesta"> {{ cestaVacia ? '' : 'Precio Total: $' + dataCostoTotal }}</p>
+    </div>
+    <p id="mensaje-cesta"> {{cestaVacia ? 'Agrega algún producto' : ''}}</p>
+  </div>
+  
+  <div class="modal-contenedor-Precio">
+    <div class="div-titulo-cesta">
+      <span class="btn-cerrar">&times;</span>
+      <h1 id="h1-titulo">Resumen de tu cesta</h1>
+      <p>____________________________________________________</p>
+    </div>
+    <p id="subtitulo-cesta"> {{cestaVacia ? 'No Tienes ningún Producto aquí' : ''}}</p>
+    <i id="iconos_cesta" [ngClass]="cestaVacia ? 'fi fi-sr-shopping-cart-add' : 'noseComoPeroFunciona' "></i>
+    <div id="cesta-Pedidos-container">
+
+    </div>
+
+    <div id="div-totalCesta">
+      <p id="total-cesta" style="font-family: 'Oswald', sans-serif; font-size: 25px;"> {{ cestaVacia ? '' : 'Precio Total: $' + dataCostoTotal }}</p>
+      <br><br>
+      <button>Pagar</button>
+    </div>
+    <p id="mensaje-cesta" style="font-family: 'Oswald', sans-serif; font-size: 25px;"> {{cestaVacia ? 'Agrega algún producto' : ''}}</p>
+  </div>
+
+
+</div>
+
+
+

@@ -13,6 +13,7 @@ import { VistaCategoriaComponent } from './paginas/vista-categoria/vista-categor
 import { NotasPendientesComponent } from './interfaces/notas-pendientes/notas-pendientes.component';
 import { ContactoComponent } from './paginas/contacto/contacto.component';
 import { CestaModalComponent } from './reutilizables/cesta-modal/cesta-modal.component';
+import { CestaComponent } from './paginas/cesta/cesta.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent, title: 'Ingresar'},
 
   { path: 'Pendientes', component: NotasPendientesComponent, title: 'Pendientes'},
+  {path: 'miCesta', component: CestaComponent, title: 'MiCesta'},
 
   // prueba cesta de compras
   {path: 'cesta_ejemplo', component:CestaModalComponent, title: 'Cesta_Beta :D'},

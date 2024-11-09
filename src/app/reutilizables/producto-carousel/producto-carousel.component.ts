@@ -9,6 +9,7 @@ import { HeaderService } from '../../servicios/dinamicos/header.service';
 import { AutenticacionService } from '../../servicios/autenticacion.service';
 import { JuegosService } from 'src/app/servicios/juegos.service';
 import { CestaService } from 'src/app/servicios/cesta.service';
+import { IF_cesta, IF_cestaResponse, IF_revisar } from 'src/app/interfaces/cestaData';
 
 
 @Component({
@@ -40,14 +41,24 @@ export class ProductoCarouselComponent implements OnInit {
   api_juegos:any;
   api_juegosNormales:any;
   api_juegoInfo:any;
-  
   userRoles: string[] = [];
   usuario_autenticado:boolean = false;
+  id_usuario:number = 0; //para almacenar el id del usuario que se ha obtenido desde el servicio
+  dataCestaAPI: IF_cesta[] = []; // Aquí se almacenará la respuesta del servidor  "información de la cesta" => $cesta...
+  CestaAPI: any; // Aquí se almacenará la respuesta del servidor  "información de la cesta" => $cesta...
+  tieneProductosCesta:boolean = false;
+  idJuegoCesta: any; // Este es para guardar el valor y colocar una nueva propiedad a la consulta de los carruseles por separado de la consulta principal, que viene siendo el de solo carruseles
+  public cantidadCesta: number = 0;
+  public cestaVacia: boolean = false;   // Indica si la cesta está vacía o no
 
   cesta:any[] = [];
   total:number = 0;
   usuarioObtenido:number = 0;
   
+  // DINAMISMO
+  hoveredProduct: any; // Propiedad para almacenar el producto sobre el cual está el mouse
+  selectedProduct: any; // Propiedad para almacenar el producto seleccionado
+
   //VARIABLES ROLES
   user: any; // Cambia a la interfaz que definas para el usuario
 
@@ -57,11 +68,12 @@ export class ProductoCarouselComponent implements OnInit {
     
     private buscadorService:BuscadorService, //Para cambiar color dinamico y cesta de compras
     private headerService:HeaderService,
-    private autenticacionService:AutenticacionService,
+    private sv_autenticacion:AutenticacionService,
     private localstorageService:LocalstorageBasicService,
     // servicios API #2
     private sv_juegos: JuegosService,
     private sv_cesta: CestaService,
+    
 
   ) {}
 
@@ -108,18 +120,15 @@ export class ProductoCarouselComponent implements OnInit {
     this.cantidadDecimal2 = this.api_juegosNormales.length / 6;
   }
 
-
-
-
-
-
-
   
 
   infoLocalStorage = this.localstorageService.consultarUsuario("informacion formulario");
 
 
   ngOnInit() {
+
+
+    this.id_usuario = this.sv_autenticacion.id_USUARIO; // obtener el idDel usuario
     
     this.sv_juegos.getJuegos_carrusel().subscribe( re =>{
       // console.log(re);
@@ -133,14 +142,58 @@ export class ProductoCarouselComponent implements OnInit {
     });
 
 
+
+    this.sv_cesta.revisarCesta(this.id_usuario).subscribe(
+      (datos: IF_revisar) => {
+          this.CestaAPI = datos.Juegos_ID;
+          this.tieneProductosCesta = datos.ok;
+
+          // Iterar sobre el arreglo Juegos_ID y mostrar el id de cada juego
+          datos.Juegos_ID.forEach(juego => {
+            console.log("ID del juego:", juego.id);
+          });
+
+          // console.log(datos); // Esto debería mostrar el arreglo de juegos con toda la información
+          console.log(datos.Juegos_ID); // Esto debería mostrar el arreglo de juegos con toda la información
+          // console.log(datos.ok); // Esto debería mostrar el arreglo de juegos con toda la información
+
+          this.verificarJuegosCesta();
+      },
+      (error) => {
+          console.error('Error al revisar la cesta:', error);
+      }
+  );
+  
+
+  // this.actualizarCantidadCesta();
+
+
   }
   // Método que verifica si el usuario tiene un rol
   isUserRole(role: string[]): boolean {
-    return this.autenticacionService.hasRole(role);
+    return this.sv_autenticacion.hasRole(role);
   }
 
-  hoveredProduct: any; // Propiedad para almacenar el producto sobre el cual está el mouse
-  selectedProduct: any; // Propiedad para almacenar el producto seleccionado
+  verificarJuegosCesta():void{
+      //api/carrusel.forEach( (variableCarrusel:any) )
+      this.api_juegos.forEach((juego: any) => {
+        const juegoEnCesta = this.CestaAPI.find((cestaItem: any) => cestaItem.juego_id === juego.id);
+        juego.carritosss = juegoEnCesta ? true : false;
+
+        // Asignar el ID de la cesta (si existe) o marcar como no en la cesta
+      if (juegoEnCesta) {
+        juego.carritosss = true;  // El juego está en la cesta
+        juego.cesta_id = juegoEnCesta.id;  // Atribuir el ID de la cesta al juego
+      } else {
+        juego.carritosss = false;  // El juego no está en la cesta
+        juego.cesta_id = null;  // No tiene un ID de cesta
+      }
+
+      });
+
+  }
+
+
 
 
   onMouseEnter(product: any) {
@@ -376,8 +429,6 @@ export class ProductoCarouselComponent implements OnInit {
 
 
   next_v2() {
-
-
     // const cantidadDecimal = this.products_v2.length / 6;
     this.recidirRedondear2(this.cantidadDecimal2);
 
@@ -389,10 +440,6 @@ export class ProductoCarouselComponent implements OnInit {
 
 
 
-
-
-
-
   detalle_Producto(detalles_id: number) {
     // detalle_Producto(detalles_id:string){
     this.router.navigate(['/preview', detalles_id]);
@@ -401,94 +448,90 @@ export class ProductoCarouselComponent implements OnInit {
   }
 
 
-  
-
   getJuego(id:number){
     this.router.navigate(['/preview', id]);
   }
   
 
-  idProducto(juego_id: number):void {
-    // en el HTML aparece esto:  $event.stopPropagation(); eso es para que no deje que se active alguna otra acción fuera del boton cuando doy clic en el boton
-
-    // let producto = this.api_juegos.find((item) => item.id === id);
-
-    // let producto2 = this.products_v2.find((item) => item.id === id);
+  // idProducto(juego_id: number, carritosss:boolean, cesta_id:number):void { //se coloco el boleano y cesta_id ya cuando se empleo el carrito, pero no es tan relevante para mostrar los productos, en un principio, solamente quitar lo relacionado con esto para dejar lo demas, tanto en el html como en la funcion de esta función
+  idProducto11(product:any):void { //se coloco el boleano y cesta_id ya cuando se empleo el carrito, pero no es tan relevante para mostrar los productos, en un principio, solamente quitar lo relacionado con esto para dejar lo demas, tanto en el html como en la funcion de esta función
     
-    // let productoAgregado = producto || producto2;
 
-    // if(producto){
-    // if(productoAgregado){
-
-    //   let nuevo = {
-    //     juego: productoAgregado.name, //juego: producto.name,
-    //     costo: parseFloat(productoAgregado.originalPrice), //parseFloat(producto.originalPrice),
-    //     loMenos: parseFloat(productoAgregado.discount.replace('%', '')),  //parseFloat(producto.discount.replace('%', '')) // Convertir el descuento si es necesario
-    //     idJuego: productoAgregado.id,
-    //     imagen:productoAgregado.image
-    //   };
-
-    //   if(productoAgregado.carrito === 0){ //verificar si el juego tiene 1 o 0
-    //     this.agregarJuego(nuevo);
-    //     // this.modificarProducto(productoAgregado.id, 1); //this.modificarProducto(producto.id, 1);
-    //     // this.invertirIcono();
-    //   }else{
-    //     // this.modificarProducto(productoAgregado.id, 0); //this.modificarProducto(producto.id, 0);
-    //     this.quitarJuego(nuevo);
-    //     this.invertirIcono();
-    //     // console.log("segunda consulta: ", producto);
-    //   }
-
-    //   // se manda la info al componente B - Buscador
-    //   this.enviarCesta();
-
-
-    // }
-
-
-    // this.sv_cesta.agregarCesta(juego_id).subscribe( resp => {
-
-    // });
-
-    const infoLocalStorage = this.localstorageService.obtenerItem('user');
-      const userId = infoLocalStorage.id;
-      this.usuarioObtenido = userId;
-      alert(this.usuarioObtenido);
-
-    this.sv_cesta.verMiCesta(this.usuarioObtenido).subscribe( respi => {
-      alert("SE ACTIVO EL ver mi Cestaaaa");
-      // console.log(respi.juego.titulo);
-
-      // this.cesta = respi['info de la cesta'];
-      // this.total =  respi['Total'];
+    if(!product.carritosss || product.carritosss == undefined){
+      this.sv_cesta.agregarCesta(this.id_usuario, product.id).subscribe( 
+        (respuesta: IF_cestaResponse) => {
+          this.dataCestaAPI = respuesta['Info de la cesta'];
+          product.carritosss = true;
+          // this.sv_cesta.verMiCesta(this.id_usuario);
+        },
+        (error) => {
+          console.error('Error al obtener la cesta', error);
+        }
+      );
+    }else{
       
-    //   let nuevo = {
-    //     juego: productoAgregado.name, //juego: producto.name,
-    //     costo: parseFloat(productoAgregado.originalPrice), //parseFloat(producto.originalPrice),
-    //     loMenos: parseFloat(productoAgregado.discount.replace('%', '')),  //parseFloat(producto.discount.replace('%', '')) // Convertir el descuento si es necesario
-    //     idJuego: productoAgregado.id,
-    //     imagen:productoAgregado.image
-    //   };
-    // titul0:string, preci0:number, descuent0:number, idJueg0:number, precioDescontad0:number, imagen:string
+      this.sv_cesta.desactivarCesta(product.cesta_id).subscribe( resp =>{
+        alert( "holaa" + resp)
+        product.carritosss = false;
+        // this.sv_cesta.verMiCesta(this.id_usuario);
+      });
 
+    }
 
-      // let nuevo = {
-      //   titul0: respi.juego.titulo, //juego: producto.name,
-      //   preci0: parseFloat(respi.juego), //parseFloat(producto.originalPrice),
-      //   descuent0: parseFloat(respi.juego.descuento.replace('%', '')),  //parseFloat(producto.discount.replace('%', '')) // Convertir el descuento si es necesario
-      //   idJueg0: respi.juego.id,
-      //   precioDescontad0: respi.juego.precioDescontado,
-      //   imagen: respi.image
-      // };
-
-      // this.agregarJuego(nuevo);
-
-
-    });
-
-    // AQUI PONER LA FUNCION DONDE VAMOS A COLOCAR EL ID, en lugar del cesta.ts
-    // porque de aqui se va a compatir a headerSErvice y se actualice dinámicamente :D
   }
+
+  idProducto(juego_id: number, carritosss:boolean, cesta_id:number):void { //se coloco el boleano y cesta_id ya cuando se empleo el carrito, pero no es tan relevante para mostrar los productos, en un principio, solamente quitar lo relacionado con esto para dejar lo demas, tanto en el html como en la funcion de esta función
+    
+
+    if(carritosss === false || carritosss == undefined){
+      this.sv_cesta.agregarCesta(this.id_usuario, juego_id).subscribe( 
+        (respuesta: IF_cestaResponse) => {
+          this.dataCestaAPI = respuesta['Info de la cesta'];
+          // console.log('Dentro de la reSpuesta de INFO DE LA CESTA');
+          carritosss = true;
+        },
+        (error) => {
+          console.error('Error al obtener la cesta', error);
+        }
+      );
+      // this.actualizarCantidadCesta();
+      this.obtenerCesta(this.sv_autenticacion.id_USUARIO);
+    }else{
+      this.sv_cesta.desactivarCesta(cesta_id).subscribe( resp =>{
+        // alert( "holaa" + resp)
+      });
+      // this.actualizarCantidadCesta();
+
+    }
+
+  }
+
+  obtenerCesta(idUser: number): void {
+    this.sv_cesta.verMiCesta(idUser).subscribe(
+      (response: IF_cestaResponse) => {
+        this.dataCestaAPI = response['Info de la cesta'];  
+        this.cestaVacia = this.dataCestaAPI.length === 0;  // Verificar si la cesta está vacía
+      },
+      (error) => {
+        console.error('Error al obtener la cesta', error);
+      }
+    );
+  }
+
+
+  // actualizarCantidadCesta(): void {
+  //   this.sv_cesta.verMiCesta(this.sv_autenticacion.id_USUARIO).subscribe(
+  //     (response: IF_cestaResponse) => {
+  //       // this.dataCestaAPI = response['Info de la cesta'];
+  //       this.cantidadCesta = this.dataCestaAPI.length;  // Actualizar el número de productos en la cesta
+  //     },
+  //     (error) => {
+  //       console.error('Error al actualizar la cantidad de la cesta', error);
+  //     }
+  //   );
+  // }
+  
+
 
   arregloCarrito: Array<
     {

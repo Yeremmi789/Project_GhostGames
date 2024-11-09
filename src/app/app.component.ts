@@ -17,6 +17,8 @@ import { CestaModalComponent } from './reutilizables/cesta-modal/cesta-modal.com
 import { HeaderService } from './servicios/dinamicos/header.service';
 import { LocalstorageBasicService } from './servicios/localstorage-basic.service';
 import { AutenticacionService } from './servicios/autenticacion.service';
+import { CestaService } from './servicios/cesta.service';
+import { IF_cesta, IF_cestaResponse } from './interfaces/cestaData';
 
 
 
@@ -59,6 +61,9 @@ export class AppComponent implements OnInit{
 
   //VARIABLES APIS
   userRoles: string[] = [];
+  public dataCestaAPI: IF_cesta[] = []; // Aquí se almacenará la información de la cesta
+  public dataCostoTotal: number = 0;    // Aquí se almacenará el costo total
+  public cestaVacia: boolean = false;   // Indica si la cesta está vacía o no
   
   //VARIABLES ROLES
   user: any; // Cambia a la interfaz que definas para el usuario
@@ -76,7 +81,7 @@ export class AppComponent implements OnInit{
   }
 
   dataCestaCantidad: Array<{juego:string, costo:number, loMenos:number, idJuego:number, imagen:string}> = [];
-  cantidadCesta: number = 0;
+  public cantidadCesta: number = 0;
   
   @ViewChild('botonToggle') btntoggle!: ElementRef;
   @ViewChild('navToggle') navTog!: ElementRef;
@@ -94,7 +99,11 @@ export class AppComponent implements OnInit{
     private localStorage:LocalstorageBasicService,
     private autenticacionService:AutenticacionService,
     private localstorageService:LocalstorageBasicService,
-    private router:Router
+    private router:Router,
+    private sv_cesta:CestaService,
+    private sv_autenticacion:AutenticacionService,
+    private cdr:ChangeDetectorRef,
+
   ){  
 
     this.renderer.listen('window', 'click',(e:Event)=>{
@@ -141,11 +150,38 @@ export class AppComponent implements OnInit{
         this.verif_rutaActual();
         // console.log("Valor de NavigationEnd: ", NavigationEnd);
       }
-
-      this.headerService.cestaVariable$.subscribe( info => {
-        this.cantidadCesta = info.length;
-      });
     });
+
+    // this.obtenerCesta(this.sv_autenticacion.id_USUARIO);
+
+    // this.sv_cesta.cestaObservable.subscribe((dataCesta: IF_cesta[]) => {
+    //   this.dataCestaAPI = dataCesta;
+    //   this.cantidadCesta = dataCesta.length;
+    // });
+
+    this.sv_cesta.cestaObservable.subscribe((dataCesta: IF_cesta[]) => {
+      this.cantidadCesta = dataCesta.length;
+      this.cdr.detectChanges(); // Forzar la detección de cambios
+    });
+
+    this.sv_cesta.verMiCesta(this.sv_autenticacion.id_USUARIO).subscribe(() => {
+      // La suscripción actualizará la cantidad automáticamente
+    });
+  
+    // Cargar la cesta inicial una vez
+    this.sv_cesta.verMiCesta(this.sv_autenticacion.id_USUARIO).subscribe(
+      (response: IF_cestaResponse) => {
+        this.dataCestaAPI = response['Info de la cesta'];
+        this.cantidadCesta = this.dataCestaAPI.length;
+      },
+      (error) => {
+        console.error('Error al obtener la cesta', error);
+      }
+    );
+
+
+    // this.actualizarCantidadCesta();
+    // this.sv_cesta.verMiCesta(this.sv_autenticacion.id_USUARIO);
 
     // this.checkLocalStorage();
     
@@ -155,10 +191,6 @@ export class AppComponent implements OnInit{
       this.autenticacionService.userSubject.next(user);  // Restaura el usuario si está guardado en localStorage
     }
 
-      this.localstorageService.var_userLogueado$.subscribe(estado => {
-        this.logeado = estado;
-      });
-    
   }
 
   // Método que verifica si el usuario tiene un rol
@@ -193,9 +225,43 @@ export class AppComponent implements OnInit{
   }
   
   isVisible:boolean = false;
-  showModal(){
-    this.isVisible = true;
+  // showModal(){
+  //   this.isVisible = true; // Mostrar el modal después de obtener la cesta
+  //   this.obtenerCesta(this.sv_autenticacion.id_USUARIO);
+  // }
+
+  cestaComponent(){
+    this.router.navigateByUrl('/miCesta')
+    
+
   }
+
+  obtenerCesta(idUser: number): void {
+    this.sv_cesta.verMiCesta(idUser).subscribe(
+      (response: IF_cestaResponse) => {
+        this.dataCestaAPI = response['Info de la cesta'];
+        // this.dataCostoTotal = response.Total;
+        // this.cestaVacia = this.dataCestaAPI.length === 0;
+        this.cantidadCesta = this.dataCestaAPI.length;  // Actualiza la cantidad de productos en la cesta
+      },
+      (error) => {
+        console.error('Error al obtener la cesta', error);
+      }
+    );
+  }
+
+  // actualizarCantidadCesta(): void {
+  //   this.sv_cesta.verMiCesta(this.sv_autenticacion.id_USUARIO).subscribe(
+  //     (response: IF_cestaResponse) => {
+  //       // this.dataCestaAPI = response['Info de la cesta'];
+  //       this.cantidadCesta = this.dataCestaAPI.length;  // Actualizar el número de productos en la cesta
+  //     },
+  //     (error) => {
+  //       console.error('Error al actualizar la cantidad de la cesta', error);
+  //     }
+  //   );
+  // }
+  
 
   handleClose() {
     this.isVisible = false; // Asegura que el modal se cierre correctamente
@@ -218,11 +284,8 @@ export class AppComponent implements OnInit{
   }
 
   salirUsuario(){
-    // this.autenticacionService.salir();
-    // this.localStorage.quitarLocalStorage('informacion formulario');
-    let infoLS = this.localstorageService.consultarUsuario("informacion formulario");
-    infoLS.usuario_logueado = false;
-    this.localstorageService.guardarUsuario("informacion formulario", infoLS);
+    localStorage.removeItem('user')
+    localStorage.removeItem('token')
   }
 }
 

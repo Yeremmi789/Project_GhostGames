@@ -16,7 +16,7 @@ html, body {
 
 
 .link-blanco{
-  color: var(---txt-semiBlanco);
+  color: var(--txt-semiBlanco);
   font-weight: 500;
 }
 
@@ -32,7 +32,7 @@ html, body {
   height: auto;
   display: flex;
   justify-content: center;
-  background-color: var(---fondo-productos);
+  background-color: var(--fondo-productos);
 }
 
 .c-medium {
@@ -61,7 +61,7 @@ html, body {
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.7); /* Fondo negro semi-transparente */
-  color: var(---txt-blanco);
+  color: var(--txt-blanco);
   padding: 10px 20px;
   border-radius: 4px;
   font-size: 16px;
@@ -101,17 +101,17 @@ html, body {
  */
 
 :root{
-  ---txt-blanco: #ffff;
-  ---txt-semiBlanco: rgb(210, 210, 210);
-  ---txt-semiTransparenteBlanco: #7575754e;
-  ---txt-negro: #000;
-  ---btn-morado: blueviolet;
-  ---btn-azulCielo: #12F9FD;
-  ---fondo-header: #1D1D1D;
-  ---fondo-productos: #121313;
-  ---fondo-negro: #0000;
-  ---btn-flechas: #202121;
-  ---btn-flechas2: #363636;
+  --txt-blanco: #ffff;
+  --txt-semiBlanco: rgb(210, 210, 210);
+  --txt-semiTransparenteBlanco: #7575754e;
+  --txt-negro: #000;
+  --btn-morado: blueviolet;
+  --btn-azulCielo: #12F9FD;
+  --fondo-header: #1D1D1D;
+  --fondo-productos: #121313;
+  --fondo-negro: #0000;
+  --btn-flechas: #202121;
+  --btn-flechas2: #363636;
 
   --hola:blue;
 }
